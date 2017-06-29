@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/campus_information"
+            android:icon="@drawable/note"
+            android:title="@string/campus_information" /><!--校園資訊-->
+        <item
+            android:id="@+id/school_timetable"
+            android:icon="@drawable/notepad"
+            android:title="@string/school_timetable" />
+        <item
+            android:id="@+id/semester_results"
+            android:icon="@drawable/smartphone"
+            android:title="@string/semester_results" />
+        <item
+            android:id="@+id/lack_of_records"
+            android:icon="@drawable/calendar"
+            android:title="@string/lack_of_records" />
+        <item
+            android:id="@+id/OnlineRepair"
+            android:icon="@drawable/success"
+            android:title="@string/OnlineRepair" />
+        <item
+            android:id="@+id/Traffic"
+            android:icon="@drawable/bus"
+            android:title="@string/Traffic" />
+
+        <item
+            android:id="@+id/about_us"
+            android:icon="@drawable/about_us"
+            android:title="@string/about_us" />
+        <item
+            android:id="@+id/sign_out"
+            android:icon="@drawable/exit"
+            android:title="@string/sing_out" />
+    </group>
+
+
+    <!-- <item android:title="Communicate">
+         <menu>
+             <item
+                 android:id="@+id/nav_share"
+                 android:icon="@drawable/ic_menu_share"
+                 android:title="Share" />
+             <item
+                 android:id="@+id/nav_send"
+                 android:icon="@drawable/ic_menu_send"
+                 android:title="Send" />
+         </menu>
+     </item>
+ -->
+</menu>

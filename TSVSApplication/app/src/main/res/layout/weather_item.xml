@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:orientation="vertical">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:id="@+id/weather_item">
+        <TextView
+            android:id="@+id/day"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="--"
+            android:gravity="center"
+            android:textSize="@dimen/fab_margin"/>
+        <TextView
+            android:id="@+id/temprature"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="--/--"
+            android:gravity="center"
+            android:textSize="@dimen/fab_margin"/>
+        <TextView
+            android:id="@+id/pop"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="--"
+            android:gravity="center"
+            android:textSize="@dimen/fab_margin"/>
+        <TextView
+            android:id="@+id/UCV"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="--"
+            android:gravity="center"
+            android:textSize="@dimen/fab_margin"/>
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/infos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="info"
+        android:textSize="@dimen/fab_margin"/>
+</LinearLayout>

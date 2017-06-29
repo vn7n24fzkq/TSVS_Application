@@ -1,0 +1,349 @@
+<resources>
+    <string name="app_name">淡商校務通</string>
+
+    <string name="appAdMob">*****************************</string>
+    <string name="AdMob">**********************************</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="not_login">尚未登入</string>
+    <string name="click_to_login">點擊登入</string>
+    <!--menu  -->
+    <string name="campus_information">行事曆</string>
+    <string name="school_timetable">靠北淡商</string>
+    <string name="semester_results">學期成績</string>
+    <string name="lack_of_records">學期記錄</string>
+    <string name="OnlineRepair">線上報修</string>
+    <string name="Traffic">交通資訊</string>
+    <string name="about_us">關於我們</string>
+    <string name="sing_out">登出</string>
+    <string name="close">關閉</string>
+    <string name="no_NetWork">目前沒有網路連接</string>
+
+
+    <string name="about_author_title">作者</string>
+    <string name="about_author_content">方毅恆</string>
+    <string name="about_thx_title">特別感謝</string>
+    <string name="about_thx_content">鄭賓少</string>
+    <string name="about_contact_us">聯絡我們</string>
+    <string name="about_open_source_title">MIT License</string>
+    <string name="github_link">https://github.com/vn7n24fzkq/TSVS_Application</string>
+    <string name="about_open_source_content">MIT License
+
+Copyright (c) 2017 VN7
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</string>
+    <string name="json_license">simplejson</string>
+    <string name="json_license_content">"Apache License
+Version 2.0, January 2004
+http://www.apache.org/licenses/
+TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+1. Definitions.
+"License" shall mean the terms and conditions for use, reproduction,
+and distribution as defined by Sections 1 through 9 of this document.
+
+"Licensor" shall mean the copyright owner or entity authorized by
+the copyright owner that is granting the License.
+
+"Legal Entity" shall mean the union of the acting entity and all
+other entities that control, are controlled by, or are under common
+control with that entity. For the purposes of this definition,
+"control" means (i) the power, direct or indirect, to cause the
+direction or management of such entity, whether by contract or
+otherwise, or (ii) ownership of fifty percent (50%) or more of the
+outstanding shares, or (iii) beneficial ownership of such entity.
+
+"You" (or "Your") shall mean an individual or Legal Entity
+exercising permissions granted by this License.
+
+"Source" form shall mean the preferred form for making modifications,
+including but not limited to software source code, documentation
+source, and configuration files.
+
+"Object" form shall mean any form resulting from mechanical
+transformation or translation of a Source form, including but
+not limited to compiled object code, generated documentation,
+and conversions to other media types.
+
+"Work" shall mean the work of authorship, whether in Source or
+Object form, made available under the License, as indicated by a
+copyright notice that is included in or attached to the work
+(an example is provided in the Appendix below).
+
+"Derivative Works" shall mean any work, whether in Source or Object
+form, that is based on (or derived from) the Work and for which the
+editorial revisions, annotations, elaborations, or other modifications
+represent, as a whole, an original work of authorship. For the purposes
+of this License, Derivative Works shall not include works that remain
+separable from, or merely link (or bind by name) to the interfaces of,
+the Work and Derivative Works thereof.
+
+"Contribution" shall mean any work of authorship, including
+the original version of the Work and any modifications or additions
+to that Work or Derivative Works thereof, that is intentionally
+submitted to Licensor for inclusion in the Work by the copyright owner
+or by an individual or Legal Entity authorized to submit on behalf of
+the copyright owner. For the purposes of this definition, "submitted"
+means any form of electronic, verbal, or written communication sent
+to the Licensor or its representatives, including but not limited to
+communication on electronic mailing lists, source code control systems,
+and issue tracking systems that are managed by, or on behalf of, the
+Licensor for the purpose of discussing and improving the Work, but
+excluding communication that is conspicuously marked or otherwise
+designated in writing by the copyright owner as "Not a Contribution."
+
+"Contributor" shall mean Licensor and any individual or Legal Entity
+on behalf of whom a Contribution has been received by Licensor and
+subsequently incorporated within the Work.
+
+2. Grant of Copyright License. Subject to the terms and conditions of
+this License, each Contributor hereby grants to You a perpetual,
+worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+copyright license to reproduce, prepare Derivative Works of,
+publicly display, publicly perform, sublicense, and distribute the
+Work and such Derivative Works in Source or Object form.
+
+3. Grant of Patent License. Subject to the terms and conditions of
+this License, each Contributor hereby grants to You a perpetual,
+worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+(except as stated in this section) patent license to make, have made,
+use, offer to sell, sell, import, and otherwise transfer the Work,
+where such license applies only to those patent claims licensable
+by such Contributor that are necessarily infringed by their
+Contribution(s) alone or by combination of their Contribution(s)
+with the Work to which such Contribution(s) was submitted. If You
+institute patent litigation against any entity (including a
+cross-claim or counterclaim in a lawsuit) alleging that the Work
+or a Contribution incorporated within the Work constitutes direct
+or contributory patent infringement, then any patent licenses
+granted to You under this License for that Work shall terminate
+as of the date such litigation is filed.
+
+4. Redistribution. You may reproduce and distribute copies of the
+Work or Derivative Works thereof in any medium, with or without
+modifications, and in Source or Object form, provided that You
+meet the following conditions:
+
+(a) You must give any other recipients of the Work or
+Derivative Works a copy of this License; and
+
+(b) You must cause any modified files to carry prominent notices
+stating that You changed the files; and
+
+(c) You must retain, in the Source form of any Derivative Works
+that You distribute, all copyright, patent, trademark, and
+attribution notices from the Source form of the Work,
+excluding those notices that do not pertain to any part of
+the Derivative Works; and
+
+(d) If the Work includes a "NOTICE" text file as part of its
+distribution, then any Derivative Works that You distribute must
+include a readable copy of the attribution notices contained
+within such NOTICE file, excluding those notices that do not
+pertain to any part of the Derivative Works, in at least one
+of the following places: within a NOTICE text file distributed
+as part of the Derivative Works; within the Source form or
+documentation, if provided along with the Derivative Works; or,
+within a display generated by the Derivative Works, if and
+wherever such third-party notices normally appear. The contents
+of the NOTICE file are for informational purposes only and
+do not modify the License. You may add Your own attribution
+notices within Derivative Works that You distribute, alongside
+or as an addendum to the NOTICE text from the Work, provided
+that such additional attribution notices cannot be construed
+as modifying the License.
+
+You may add Your own copyright statement to Your modifications and
+may provide additional or different license terms and conditions
+for use, reproduction, or distribution of Your modifications, or
+for any such Derivative Works as a whole, provided Your use,
+reproduction, and distribution of the Work otherwise complies with
+the conditions stated in this License.
+
+5. Submission of Contributions. Unless You explicitly state otherwise,
+any Contribution intentionally submitted for inclusion in the Work
+by You to the Licensor shall be under the terms and conditions of
+this License, without any additional terms or conditions.
+Notwithstanding the above, nothing herein shall supersede or modify
+the terms of any separate license agreement you may have executed
+with Licensor regarding such Contributions.
+
+6. Trademarks. This License does not grant permission to use the trade
+names, trademarks, service marks, or product names of the Licensor,
+except as required for reasonable and customary use in describing the
+origin of the Work and reproducing the content of the NOTICE file.
+
+7. Disclaimer of Warranty. Unless required by applicable law or
+agreed to in writing, Licensor provides the Work (and each
+Contributor provides its Contributions) on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+implied, including, without limitation, any warranties or conditions
+of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+PARTICULAR PURPOSE. You are solely responsible for determining the
+appropriateness of using or redistributing the Work and assume any
+risks associated with Your exercise of permissions under this License.
+
+8. Limitation of Liability. In no event and under no legal theory,
+whether in tort (including negligence), contract, or otherwise,
+unless required by applicable law (such as deliberate and grossly
+negligent acts) or agreed to in writing, shall any Contributor be
+liable to You for damages, including any direct, indirect, special,
+incidental, or consequential damages of any character arising as a
+result of this License or out of the use or inability to use the
+Work (including but not limited to damages for loss of goodwill,
+work stoppage, computer failure or malfunction, or any and all
+other commercial damages or losses), even if such Contributor
+has been advised of the possibility of such damages.
+
+9. Accepting Warranty or Additional Liability. While redistributing
+the Work or Derivative Works thereof, You may choose to offer,
+and charge a fee for, acceptance of support, warranty, indemnity,
+or other liability obligations and/or rights consistent with this
+License. However, in accepting such obligations, You may act only
+on Your own behalf and on Your sole responsibility, not on behalf
+of any other Contributor, and only if You agree to indemnify,
+defend, and hold each Contributor harmless for any liability
+incurred by, or claims asserted against, such Contributor by reason
+of your accepting any such warranty or additional liability.
+
+END OF TERMS AND CONDITIONS
+
+APPENDIX: How to apply the Apache License to your work.
+
+To apply the Apache License to your work, attach the following
+boilerplate notice, with the fields enclosed by brackets "[]"
+replaced with your own identifying information. (Don't include
+the brackets!)  The text should be enclosed in the appropriate
+comment syntax for the file format. We also recommend that a
+file or class name and description of purpose be included on the
+same "printed page" as the copyright notice for easier
+identification within third-party archives.
+
+Copyright [yyyy] [name of copyright owner]
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License."
+</string>
+    <string name="weather_license">中央氣象局 OPEN DATA</string>
+    <string name="weather_license_link">http://data.gov.tw/?q=principle</string>
+    <string name="weather_license_content">政府資料開放授權條款－第1版
+中華民國104年7月27日訂定
+為便利民眾共享及應用政府資料、促進及活化政府資料應用、結合民間創意提升政府資料品質及價值、優化政府服務品質，訂定本條款。
+
+一、定義
+
+(一)資料提供機關：指將職權範圍內取得或作成之各類電子資料，透過本條款釋出予公眾之政府機關（構）、公營事業機構、公立學校及行政法人。
+
+(二)使用者：指依本條款規定取得開放資料，並對其利用之自然人、法人或團體，包括依本條款授權使用者再轉授權利用之人或團體。
+
+(三)開放資料：指資料提供機關擁有完整著作財產權，或經授權得再轉授權第三人利用之資料，並以公開、可修改，且無不必要技術限制之格式提供者，包括但不限於下列著作：
+
+1. 編輯著作：選擇、編排具有創作性，而可受著作權法保護之資料庫或其他結構化資料組合。
+
+2. 素材：指開放資料集合物中，其他可受著作權法保護之獨立著作。
+
+(四)衍生物：指依本條款所提供之開放資料，進行後續重製、改作、編輯或為其他方式利用之修改物。
+
+(五)資訊：指不受著作權法保護之純粹紀錄，並隨同開放資料一併提供者。前揭資訊除本條款授與權利之規定外，比照有關開放資料之規定辦理。
+
+二、授與權利
+
+(一)各機關所提供之開放資料，授權使用者不限目的、時間及地域、非專屬、不可撤回、免授權金進行利用，利用之方式包括重製、散布、公開傳輸、公開播送、公開口述、公開上映、公開演出、編輯、改作，包括但不限於開發各種產品或服務型態之衍生物。
+
+(二)使用者得再轉授權他人為前項之利用。
+
+(三)使用者依本條款規定利用開放資料，無須另行取得各資料提供機關之書面或其他方式授權。
+
+(四)本條款之授權範圍不包括專利權及商標權。
+
+三、課予義務
+
+(一)使用者利用依本條款提供之開放資料，視為同意遵守本條款之各項規定，並應以尊重第三人著作人格權之方式利用之。
+
+(二)使用者利用依本條款提供之開放資料，及後續之衍生物，應以符合附件所示「顯名聲明」要求之方式，明確標示原資料提供機關之相關聲明；未盡顯名標示義務者，視為自始未取得開放資料之授權。
+
+四、版本更新及授權轉換
+
+(一)本條款如有修正，依舊條款提供之開放資料，於新條款公告時，使用者得選擇採用新條款利用。但原資料提供機關，於提供開放資料時，已訂明其使用之特定版本條款者，不在此限。
+
+(二)本條款與「創用CC授權 姓名標示 4.0 國際版本」相容，使用者依本條款利用開放資料，如後續以「創用CC授權 姓名標示 4.0 國際版本」規定之方式利用，視為符合本條款之規定。
+
+五、停止提供
+
+有下列情形之一者，各資料提供機關得停止全部或一部開放資料之提供，使用者不得向資料提供機關請求任何賠償或補償：
+
+1. 因情事變更或其他正當事由，致各資料提供機關評估繼續提供該開放資料供公眾使用，已不符合公共利益之要求。
+
+2. 所提供之開放資料，有侵害第三人智慧財產權、隱私權或其他法律上利益之虞。
+
+六、免責聲明
+
+(一)依本條款提供之開放資料，不構成任何資料提供機關申述、保證或暗示其推薦、同意、許可或核准之意思表示；各資料提供機關僅於知悉其所提供之開放資料有錯誤或遺漏時，負修正及補充之責。
+
+(二)使用者利用依本條款提供之開放資料，受有損害或損失，或致第三人受有損害或損失，而遭求償者，除法令另有規定外，各資料提供機關不負任何賠償或補償之責。
+
+(三)使用者利用依本條款提供之開放資料，因故意或過失，致資料提供機關遭受損害，或第三人因此向資料提供機關請求賠償損害，使用者應對各機關負賠償責任。
+
+七、準據法
+
+本條款之解釋、效力、履行及其他未盡事宜，以中華民國法律為準據法。
+
+附件：顯名聲明
+
+提供機關／單位 [年份] [開放資料釋出名稱與版本號]
+此開放資料依政府資料開放授權條款 (Open Government Data License) 進行公眾釋出，使用者於遵守本條款各項規定之前提下，得利用之。
+政府資料開放授權條款：http://data.gov.tw/?q=principle
+
+</string>
+
+    <string-array name="cowbei_array">
+        <item>靠北淡商</item>
+        <item>投稿靠北</item>
+    </string-array>
+    <string-array name="results_array">
+        <item>歷年成績</item>
+        <item>月考成績</item>
+    </string-array>
+    <string-array name="records_array">
+        <item>缺曠紀錄</item>
+        <item>獎懲紀錄</item>
+    </string-array>
+    <string-array name="select_grade">
+        <item>一年級</item>
+        <item>二年級</item>
+        <item>三年級</item>
+        <item>四年級</item>
+        <item>畢業</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_about_us">AboutUsActivity</string>
+    <string name="title_activity_traffic">TrafficActivity</string>
+
+    <!-- <string name="action_settings">Settings</string>-->
+</resources>
