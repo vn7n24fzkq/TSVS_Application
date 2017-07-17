@@ -7,8 +7,8 @@ android {
         applicationId "vn7.tsvsapplication"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 9
-        versionName "1.31"
+        versionCode 10
+        versionName "1.32"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

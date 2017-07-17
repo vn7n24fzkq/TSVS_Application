@@ -255,7 +255,12 @@ public class TSVSparser {
             int currentPage = 1;
             String currentDate = "", schedule = "", department = "";
             Document doc = Jsoup.parse(getUrl(calendar_url + "&mode=view&y1=" + year + "&m1=" + month + "&PageNo=" + currentPage, "UTF-8"));
-            int allPage = doc.getElementById("pagesellabel").childNodeSize();
+            int allPage = 1;
+            try {
+                allPage = doc.getElementById("pagesellabel").childNodeSize();
+            } catch (Exception e) {
+
+            }
             int departmentCount = 0;
 
             //parse html to json
