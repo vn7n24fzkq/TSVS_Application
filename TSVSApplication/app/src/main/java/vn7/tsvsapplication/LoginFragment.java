@@ -34,6 +34,7 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
 import vn7.tsvsapplication.back_end.NetworkService;
 import vn7.tsvsapplication.back_end.TSVSparser;
+import vn7.tsvsapplication.back_end.weather.WeatherSample;
 
 
 public class LoginFragment extends Fragment {
@@ -144,6 +145,8 @@ public class LoginFragment extends Fragment {
                                                     }
                                                 }).show();
                                     }
+                                    TSVSparser.google_calendar_url = (String) mFirebaseRemoteConfig.getString("google_calendar");
+                                    WeatherSample.key = (String) mFirebaseRemoteConfig.getString("Weather_Authorization");
                                 }
                             } catch (Exception e) {
 

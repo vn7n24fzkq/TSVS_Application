@@ -13,10 +13,15 @@ import java.net.ProtocolException;
 
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -32,9 +37,8 @@ public class TSVSparser {
     public static final boolean sucess = true, fail = false;
     private static final int timeout = 10000;
     private static final String i_Stu_Session_Timeout_title = "【 新北市立淡水商工　學生選單()　V2.2】";
-    // private String getSession_url =
 
-    // "http://csv.tsvs.ntpc.edu.tw/csn/stu.asp?CHOICE=OK";
+      // "http://csv.tsvs.ntpc.edu.tw/csn/stu.asp?CHOICE=OK";
     // public final String i_Stu_url = "http://210.71.68.6/csn/i_Stu.asp";
 
     // check session
@@ -47,6 +51,7 @@ public class TSVSparser {
     public static final String stu_absence_url = "http://csv.tsvs.ntpc.edu.tw/csn/work.asp";// 出缺席紀錄
     public static final String stu_rewards_url = "http://csv.tsvs.ntpc.edu.tw/csn/ds.asp";// 獎懲記錄
     // "UTF-8"
+    public static  String google_calendar_url = "https://www.googleapis.com/calendar/v3/calendars/tsvsgao%40tsvs.ntpc.edu.tw/events";
     public static final String calendar_url = "http://www.tsvs.ntpc.edu.tw/calendar/pagecalendar.asp?id={16D0AC9B-D5CD-495F-8822-EDAEF6A82867}";//行事曆
     public static final String onlineRepair_url = "https://docs.google.com/forms/d/e/1FAIpQLSdq-7aH6EauPo7TBn_GKFwul4rgsomVvWdYX7awDIat-5Rq5Q/viewform";//線上報修
     public static final String onlineRepairFile_url = "https://goo.gl/9TQaQD";//報修結果下載
@@ -154,7 +159,7 @@ public class TSVSparser {
         URL url = new URL(URL);
         HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
         httpConn.setDoInput(true);
-        httpConn.setDoOutput(true);
+        httpConn.setDoOutput(false);
         httpConn.setUseCaches(false);
         httpConn.setConnectTimeout(timeout);
         httpConn.setRequestProperty("Cookie", TSVSparser.cookie);
@@ -162,6 +167,7 @@ public class TSVSparser {
         // read html
         String content = "";
         try {
+
             InputStreamReader in = new InputStreamReader(httpConn.getInputStream(), charsetName);
             BufferedReader br = new BufferedReader(in);
             String s;
@@ -246,7 +252,58 @@ public class TSVSparser {
 
         return Announcement;
     }
+    public static JSONObject getGoogle_Calendar(String year, String month) throws Exception {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, Integer.parseInt(year));
+        c.set(Calendar.MONTH, Integer.parseInt(month) - 1);
+        c.set(Calendar.DAY_OF_MONTH, c.getActualMinimum(Calendar.DAY_OF_MONTH));
+        // get first day of month
+        c.set(Calendar.DAY_OF_MONTH, c.getActualMinimum(Calendar.DAY_OF_MONTH));
+        String startDate = dateFormat.format(c.getTime());
+        // get last day of month
+        c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
+        String endDate = dateFormat.format(c.getTime());
+        String timeMax = URLEncoder.encode(endDate + "T23:59:59+08:00"),
+                timeMin = URLEncoder.encode(startDate + "T00:00:00+08:00");
+        JSONObject calendar = new JSONObject();
+        JSONArray jarray = new JSONArray();
+        try {
+            JSONParser parser = new JSONParser();
+            JSONArray jsonarray = (JSONArray) ((JSONObject) parser.parse(getUrl(google_calendar_url
+                    + "&orderBy=startTime&singleEvents=true&timeMax=" + timeMax + "&timeMin=" + timeMin, "UTF-8")))
+                    .get("items");
+            SimpleDateFormat simpleFormat = new SimpleDateFormat("M月d日E");
+            for (int i = 0; i < jsonarray.size(); i++) {
 
+                // set json element
+                JSONObject jobject = new JSONObject();
+                String  date_time;
+                JSONObject time = ((JSONObject) ((JSONObject) jsonarray.get(i)).get("start"));
+                try{
+                    date_time = (String)time.get("date");
+                    if(date_time == null) {
+                        date_time = ((String)time.get("dateTime")).substring(0,10);
+                    }
+                }catch(Exception e) {
+                    date_time = "0001-01-01";
+                }
+
+                Date date = dateFormat.parse(date_time);
+                jobject.put("date", simpleFormat.format(date));
+                jobject.put("schedule", ((JSONObject) jsonarray.get(i)).get("summary"));
+                jobject.put("department", ((JSONObject) jsonarray.get(i)).get("location"));
+                // put element in jarray
+                jarray.add(jobject);
+            }
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        calendar.put("calendar", jarray);
+        return calendar;
+    }
     public static JSONObject getSchool_Calendar(String year, String month) throws Exception {
         JSONObject calendar = new JSONObject();
         JSONArray jarray = new JSONArray();

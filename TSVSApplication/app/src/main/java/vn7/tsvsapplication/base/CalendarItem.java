@@ -8,9 +8,7 @@ public class CalendarItem {
     public CalendarItem(String date, String schedule, String department) {
         this.date = date;
         this.schedule = schedule;
-        //parser有時候會有意料之外的格式，先註解掉，待parser程式部分完善
-        //  this.department = department;
-        this.department = "";
+        this.department = department;
     }
 
     public String getDate() {

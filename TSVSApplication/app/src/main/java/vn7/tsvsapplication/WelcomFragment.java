@@ -206,7 +206,7 @@ public class WelcomFragment extends Fragment {
         public void run() {
             try {
                 sendMessageToHandler(calendarRefresh, startLoading);
-                JSONObject jsonObject = TSVSparser.getSchool_Calendar(year, month);
+                JSONObject jsonObject = TSVSparser.getGoogle_Calendar(year, month);
                 JSONArray jArray = (JSONArray) jsonObject.get("calendar");
                 List<CalendarItem> itemList = new ArrayList<CalendarItem>();
                 for (int i = 0; i < jArray.size(); i++) {

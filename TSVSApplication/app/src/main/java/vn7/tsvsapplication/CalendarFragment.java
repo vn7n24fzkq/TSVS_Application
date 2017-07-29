@@ -49,11 +49,11 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy年MM月", Locale.TAIWAN);
     private SwipeRefreshLayout mSwipeRefreshLayout;
-
     public CalendarFragment() {
 
     }
     private void init(){
+
         mSwipeRefreshLayout.setColorSchemeResources(R.color.red,R.color.orange, R.color.green, R.color.blue);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -169,7 +169,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
         public void run() {
             try {
                 sendMessageToHandler(startLoading);
-                JSONObject jsonObject = TSVSparser.getSchool_Calendar(year, month);
+                JSONObject jsonObject = TSVSparser.getGoogle_Calendar(year, month);
                 JSONArray jArray = (JSONArray) jsonObject.get("calendar");
                 List<CalendarItem> itemList = new ArrayList<CalendarItem>();
                 for (int i = 0; i < jArray.size(); i++) {

@@ -16,7 +16,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class WeatherSample {
-
+    public static String key;
 
     public ArrayList<WeekWeather> getWeekWeather(String location) throws IOException {
         String city = "", town = "";
@@ -30,7 +30,7 @@ public class WeatherSample {
         HttpURLConnection httpConn = (HttpURLConnection) conn;
         httpConn.setRequestMethod("GET");
         // api key
-        httpConn.setRequestProperty("Authorization", "CWB-2D6E804F-3E3E-472D-8B1E-1628E80BFABD");
+        httpConn.setRequestProperty("Authorization", key);
         httpConn.connect();
         httpConn.getResponseCode();
         Reader in = new InputStreamReader(httpConn.getInputStream(), "UTF-8");
