@@ -69,7 +69,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
             public void onClick(View v) {
                 try {
                     dateFormatter.parse(editText_calendar.getText().toString());
-                    Log.d("日期", String.valueOf(dateFormatter.getCalendar().get(Calendar.MONTH)));
+                    Log.d("日期(月份 +)", String.valueOf(dateFormatter.getCalendar().get(Calendar.MONTH) +1 ));
                     search(dateFormatter.getCalendar().get(Calendar.YEAR), dateFormatter.getCalendar().get(Calendar.MONTH));
                 } catch (Exception e) {
 
@@ -140,7 +140,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
             if (msg.what == setAdapterList) {
                 calendar_list.setAdapter(mListAdapter);
             } else if (msg.what == startLoading) {
-                Toast.makeText(getActivity(),"努力載入中─=≡Σ((( つ•̀ω•́)つ",Toast.LENGTH_SHORT);
+                Toast.makeText(getActivity(),"努力載入中─=≡Σ((( つ•̀ω•́)つ",Toast.LENGTH_SHORT).show();
                 mSwipeRefreshLayout.setRefreshing(true);
             } else if (msg.what == endLoading) {
                 mSwipeRefreshLayout.setRefreshing(false);
@@ -171,10 +171,27 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
                 sendMessageToHandler(startLoading);
                 JSONObject jsonObject = TSVSparser.getGoogle_Calendar(year, month);
                 JSONArray jArray = (JSONArray) jsonObject.get("calendar");
+
                 List<CalendarItem> itemList = new ArrayList<CalendarItem>();
                 for (int i = 0; i < jArray.size(); i++) {
                     JSONObject jObject = (JSONObject) jArray.get(i);
-                    itemList.add(new CalendarItem(jObject.get("date").toString(), jObject.get("schedule").toString(), jObject.get("department").toString()));
+                    String  date ,schedule,department;
+                    try{
+                        date =  jObject.get("date").toString();
+                    }catch(NullPointerException e){
+                        date = "";
+                    }
+                    try{
+                        schedule =  jObject.get("schedule").toString();
+                    }catch(NullPointerException e){
+                        schedule= "";
+                    }
+                    try{
+                        department =  jObject.get("department").toString();
+                    }catch(NullPointerException e){
+                        department = "";
+                    }
+                    itemList.add(new CalendarItem(date,  schedule, department));
                 }
                 itemList.add(new CalendarItem("本月尚無更多排定事項", "(,,・ω・,,)已經沒有囉", ""));
                 mListAdapter = new CalendarListAdapter(context, itemList);

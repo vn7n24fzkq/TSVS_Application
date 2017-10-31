@@ -20,6 +20,7 @@
     <color name="green">#009900</color>
     <color name="blue">#000099</color>
 
+    <color name="alpha">#00ffffff</color>
     <color name="Dark">#125688</color>
     <color name="colorDark">#3a66b7</color>
 </resources>

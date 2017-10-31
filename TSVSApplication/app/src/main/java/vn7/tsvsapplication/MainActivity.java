@@ -24,6 +24,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdView;
+
 import org.json.simple.JSONObject;
 
 import java.io.IOException;

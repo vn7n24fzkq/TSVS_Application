@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">淡商校務通</string>
 
-    <string name="appAdMob">*****************************</string>
-    <string name="AdMob">**********************************</string>
+    <string name="appAdMob">ca-app-pub-7280574531410132~7166269003</string>
+    <string name="AdMob">ca-app-pub-7280574531410132/6747466601</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
