@@ -7,7 +7,6 @@
     <color name="navigationBarColor">#000000</color>
     <color name="colorLight"> #33bbca</color>
     <color name="colorAccent">#4b84ed</color>
-    <color name="colorAccen">#ff4081</color>
     <color name="colorGray">#9c999e</color>
     <color name="formLine">#9c999e</color>
     <color name="title_text">#ffffff</color>
@@ -17,8 +16,11 @@
 
     <color name="red">#ec2c2c</color>
     <color name="orange">#FF9900</color>
+    <color name="yellow">#e5ea54</color>
     <color name="green">#009900</color>
-    <color name="blue">#000099</color>
+    <color name="blue">#2fbcd8</color>
+    <color name="indigo">#323ff2</color>
+    <color name="purple">#7b0ad8</color>
 
     <color name="alpha">#00ffffff</color>
     <color name="Dark">#125688</color>
