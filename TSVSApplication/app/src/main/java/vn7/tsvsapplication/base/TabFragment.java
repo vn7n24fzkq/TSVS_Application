@@ -21,7 +21,7 @@ public class TabFragment extends Fragment implements TabLayout.OnTabSelectedList
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private MyViewPagerAdapter viewPagerAdapter;
-    //TabLayout标签
+    //TabLayout tab
     private String[] titles = {};
     private ArrayList<Fragment> fragments = new ArrayList<Fragment>();
 
@@ -38,15 +38,14 @@ public class TabFragment extends Fragment implements TabLayout.OnTabSelectedList
         tabLayout = (TabLayout) v.findViewById(R.id.tab_layout);
         viewPager = (ViewPager) v.findViewById(R.id.view_pager);
 
-        //设置TabLayout标签的显示方式
+        //set mode
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
 
-        //循环注入标签
-        System.out.print(titles);
+        //loop add tab
         for (String tab : titles) {
             tabLayout.addTab(tabLayout.newTab().setText(tab));
         }
-        //设置TabLayout点击事件
+        //set TabLayout touch listener
         tabLayout.setOnTabSelectedListener(this);
         setViewPager();
     }

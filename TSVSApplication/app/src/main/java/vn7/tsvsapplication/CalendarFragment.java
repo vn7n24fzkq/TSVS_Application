@@ -49,12 +49,14 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy年MM月", Locale.TAIWAN);
     private SwipeRefreshLayout mSwipeRefreshLayout;
+
     public CalendarFragment() {
 
     }
-    private void init(){
 
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.red,R.color.orange, R.color.green, R.color.blue);
+    private void init() {
+
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.red, R.color.orange, R.color.green, R.color.blue);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -69,7 +71,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
             public void onClick(View v) {
                 try {
                     dateFormatter.parse(editText_calendar.getText().toString());
-                    Log.d("日期(月份 +)", String.valueOf(dateFormatter.getCalendar().get(Calendar.MONTH) +1 ));
+                    Log.d("日期(月份 +)", String.valueOf(dateFormatter.getCalendar().get(Calendar.MONTH) + 1));
                     search(dateFormatter.getCalendar().get(Calendar.YEAR), dateFormatter.getCalendar().get(Calendar.MONTH));
                 } catch (Exception e) {
 
@@ -112,9 +114,9 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
             }
 
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-        try{
-           ((ViewGroup) datePickerDialog.getDatePicker()).findViewById(Resources.getSystem().getIdentifier("day", "id", "android")).setVisibility(View.GONE);
-        }catch(Exception e){
+        try {
+            ((ViewGroup) datePickerDialog.getDatePicker()).findViewById(Resources.getSystem().getIdentifier("day", "id", "android")).setVisibility(View.GONE);
+        } catch (Exception e) {
 
         }
 
@@ -127,9 +129,6 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
     }
 
 
-
-
-
     private final byte startLoading = 0x01;
     private final byte endLoading = 0x02;
     private final byte setAdapterList = 0x03;
@@ -140,7 +139,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
             if (msg.what == setAdapterList) {
                 calendar_list.setAdapter(mListAdapter);
             } else if (msg.what == startLoading) {
-                Toast.makeText(getActivity(),"努力載入中─=≡Σ((( つ•̀ω•́)つ",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "努力載入中─=≡Σ((( つ•̀ω•́)つ", Toast.LENGTH_SHORT).show();
                 mSwipeRefreshLayout.setRefreshing(true);
             } else if (msg.what == endLoading) {
                 mSwipeRefreshLayout.setRefreshing(false);
@@ -175,23 +174,23 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
                 List<CalendarItem> itemList = new ArrayList<CalendarItem>();
                 for (int i = 0; i < jArray.size(); i++) {
                     JSONObject jObject = (JSONObject) jArray.get(i);
-                    String  date ,schedule,department;
-                    try{
-                        date =  jObject.get("date").toString();
-                    }catch(NullPointerException e){
+                    String date, schedule, department;
+                    try {
+                        date = jObject.get("date").toString();
+                    } catch (NullPointerException e) {
                         date = "";
                     }
-                    try{
-                        schedule =  jObject.get("schedule").toString();
-                    }catch(NullPointerException e){
-                        schedule= "";
+                    try {
+                        schedule = jObject.get("schedule").toString();
+                    } catch (NullPointerException e) {
+                        schedule = "";
                     }
-                    try{
-                        department =  jObject.get("department").toString();
-                    }catch(NullPointerException e){
+                    try {
+                        department = jObject.get("department").toString();
+                    } catch (NullPointerException e) {
                         department = "";
                     }
-                    itemList.add(new CalendarItem(date,  schedule, department));
+                    itemList.add(new CalendarItem(date, schedule, department));
                 }
                 itemList.add(new CalendarItem("本月尚無更多排定事項", "(,,・ω・,,)已經沒有囉", ""));
                 mListAdapter = new CalendarListAdapter(context, itemList);

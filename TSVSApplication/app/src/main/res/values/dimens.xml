@@ -12,4 +12,6 @@
     <dimen name="large_textSize">40dp</dimen>
     <dimen name="margin_small">8dp</dimen>
     <dimen name="text_action">15sp</dimen>
+    <!-- calendar margin-->
+    <dimen name="calendar_bottom_margin">5dp</dimen>
 </resources>

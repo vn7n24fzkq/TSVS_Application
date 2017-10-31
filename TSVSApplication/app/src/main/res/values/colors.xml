@@ -16,12 +16,21 @@
 
     <color name="red">#ec2c2c</color>
     <color name="orange">#FF9900</color>
-    <color name="yellow">#e5ea54</color>
+    <color name="yellow">#e2e932</color>
     <color name="green">#009900</color>
-    <color name="blue">#2fbcd8</color>
+    <color name="blue">#18b1cf</color>
     <color name="indigo">#323ff2</color>
     <color name="purple">#7b0ad8</color>
 
+    <array name="color_circle">
+        <item>@color/red</item>
+        <item>@color/orange</item>
+        <item>@color/yellow</item>
+        <item>@color/green</item>
+        <item>@color/blue</item>
+        <item>@color/indigo</item>
+        <item>@color/purple</item>
+    </array>
     <color name="alpha">#00ffffff</color>
     <color name="Dark">#125688</color>
     <color name="colorDark">#3a66b7</color>
