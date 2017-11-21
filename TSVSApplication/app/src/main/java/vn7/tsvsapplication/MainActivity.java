@@ -37,7 +37,7 @@ import vn7.tsvsapplication.base.TabFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
-    private static View nav_header;
+    private View nav_header;
     private static TextView user_id, user_name, class_number;
     private CoordinatorLayout coordinatorLayout;
     private Snackbar snackbar;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity
             Bundle message = intent.getExtras();
             boolean value = message.getBoolean("networkConnectStatus");
             String strValue = String.valueOf(value);
-            if (value == false) {
+            if (!value) {
                 snackbar.show();
             } else {
                 snackbar.dismiss();
@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity
                 sign_out(false);
                 intoLogin();
             }
-
         }
     };
 
@@ -84,6 +83,7 @@ public class MainActivity extends AppCompatActivity
         IntentFilter filter = new IntentFilter(NetworkService.tag);
         // 將 BroadcastReceiver 在 Activity 掛起來。
         registerReceiver(receiver, filter);
+        //無網路時顯示snackbar
         snackbar = Snackbar
                 .make(coordinatorLayout, getResources().getString(R.string.no_NetWork), Snackbar.LENGTH_INDEFINITE)
                 .setAction(getResources().getString(R.string.close), new View.OnClickListener() {
@@ -126,6 +126,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
+        //螢幕改變方向
         super.onConfigurationChanged(newConfig);
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
@@ -147,7 +148,7 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            // super.onBackPressed();
+            super.onBackPressed();
         }
     }
 
@@ -162,54 +163,30 @@ public class MainActivity extends AppCompatActivity
         stopService(new Intent().setClass(MainActivity.this, NetworkService.class));
         super.onDestroy();
     }
-    /*
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            // Handle action bar item clicks here. The action bar will
-            // automatically handle clicks on the Home/Up button, so long
-            // as you specify a parent activity in AndroidManifest.xml.
-            int id = item.getItemId();
 
-            //noinspection SimplifiableIfStatement
-            if (id == R.id.action_settings) {
-                return true;
-            }
-
-            return super.onOptionsItemSelected(item);
-        }
-    */
-    ;
-    // private static HashMap<String, Fragment> fragmentArrayList = new HashMap<String, Fragment>();
-
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here..
 
         int id = item.getItemId();
 
-        if (id == R.id.campus_information) {
+        if (id == R.id.campus_information) {    //行事曆
             toolbar.setTitle(getResources().getString(R.string.campus_information));
             switchFragment(new CalendarFragment());
-        } else if (id == R.id.school_timetable) {
-            toolbar.setTitle(getResources().getString(R.string.school_timetable));
-      //      switchFragment(new CowBeiTSVSFragment());
+        } else if (id == R.id.cowbei_school) {  //靠北淡商
+            toolbar.setTitle(getResources().getString(R.string.cowbei_school));
             switchFragment(TabFragment.newInstance(getResources().getStringArray(R.array.cowbei_array)));
-         /*   Intent intent = new Intent();
-            intent.setClass(MainActivity.this, WebviewActivity.class);
-            startActivity(intent);*/
-        } else if (id == R.id.semester_results) {
-            if (TSVSparser.getLoginStatus() == true) {
+        } else if (id == R.id.semester_results) {   //學期成績
+            if (TSVSparser.isLogin()) {
                 checkSession();
                 toolbar.setTitle(getResources().getString(R.string.semester_results));
-               // switchFragment(new StuScoreFragment());
                 switchFragment(TabFragment.newInstance(getResources().getStringArray(R.array.results_array)));
             } else {
                 plzLogin();
                 intoLogin();
             }
-        } else if (id == R.id.lack_of_records) {
-            if (TSVSparser.getLoginStatus() == true) {
+        } else if (id == R.id.lack_of_records) { //學期記錄
+            if (TSVSparser.isLogin()) {
                 checkSession();
                 toolbar.setTitle(getResources().getString(R.string.lack_of_records));
                 switchFragment(TabFragment.newInstance(getResources().getStringArray(R.array.records_array)));
@@ -217,36 +194,32 @@ public class MainActivity extends AppCompatActivity
                 plzLogin();
                 intoLogin();
             }
-        } else if (id == R.id.OnlineRepair) {
+        } else if (id == R.id.OnlineRepair) {   //線上報修
             Intent intent = new Intent();
             intent.setClass(MainActivity.this, OnlineRepairActivity.class);
             startActivity(intent);
-        } else if (id == R.id.Traffic) {
+
+        } else if (id == R.id.Traffic) {        //交通資訊
             Intent intent = new Intent();
             intent.setClass(MainActivity.this, TrafficActivity.class);
             startActivity(intent);
-        } else if (id == R.id.about_us) {
-        //    toolbar.setTitle(getResources().getString(R.string.about_us));
+        } else if (id == R.id.about_us) {       //關於我們
             Intent intent = new Intent();
             intent.setClass(MainActivity.this, AboutUsActivity.class);
             startActivity(intent);
-        } else if (id == R.id.sign_out) {
+        } else if (id == R.id.sign_out) {       //登出
             sign_out(true);
             intoLogin();
         }
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
     private void switchFragment(Fragment fragment) {
-
         if (fragment != null) {
             FragmentManager fragmentManager = getFragmentManager();
-
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
         }
     }
@@ -274,7 +247,7 @@ public class MainActivity extends AppCompatActivity
     public void onClick(View v) {
         if (v == nav_header) {
             //跳轉登入畫面
-            if (TSVSparser.getLoginStatus() == true) {
+            if (TSVSparser.isLogin()) {
                 toolbar.setTitle(getResources().getString(R.string.app_name));
                 switchFragment(new WelcomFragment());
             } else {
@@ -289,7 +262,7 @@ public class MainActivity extends AppCompatActivity
         Thread th = new Thread() {
             @Override
             public void run() {
-                if (TSVSparser.checkSession() == false) {
+                if (TSVSparser.checkSession()) {
                     runOnUiThread(new Runnable() {
                         public void run() {
                             Toast.makeText(MainActivity.this, "登入資訊過期,請重新登入", Toast.LENGTH_SHORT).show();
@@ -303,8 +276,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void sign_out(boolean messageVisible) {
-        if (messageVisible == true) {
-            if (TSVSparser.getLoginStatus())
+        if (messageVisible) {
+            if (TSVSparser.isLogin())
                 Toast.makeText(this, "登出囉ヽ(✿ﾟ▽ﾟ)ノ", Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(this, "還沒登入呢ヽ(✿ﾟ▽ﾟ)ノ", Toast.LENGTH_SHORT).show();
@@ -314,7 +287,6 @@ public class MainActivity extends AppCompatActivity
         class_number.setText("");
         user_id.setText(getResources().getString(R.string.click_to_login));
         user_name.setText(getResources().getString(R.string.not_login));
-        //    fragmentArrayList  = new HashMap<String, Fragment>();
     }
 
     public static void loadStuInfo() {
@@ -334,7 +306,6 @@ public class MainActivity extends AppCompatActivity
             }
         };
         th.start();
-
     }
 
     private static void setStuInfo(String classs, String classs_number, String

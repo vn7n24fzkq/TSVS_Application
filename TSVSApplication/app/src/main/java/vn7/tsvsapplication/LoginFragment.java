@@ -57,7 +57,7 @@ public class LoginFragment extends Fragment {
                 myProgressDialog.show();
             } else if (msg.what == endLoading) {
                 myProgressDialog.dismiss();
-                if (TSVSparser.getLoginStatus() == TSVSparser.sucess) {
+                if (TSVSparser.isLogin()) {
                     getActivity().runOnUiThread(new Runnable() {
                         public void run() {
                             Toast.makeText(getActivity(), "登入成功ヽ(✿ﾟ▽ﾟ)ノ", Toast.LENGTH_SHORT).show();
@@ -84,7 +84,6 @@ public class LoginFragment extends Fragment {
         myProgressDialog = new ProgressDialog(getActivity(), R.style.AppCompatAlertDialogStyle);
         myProgressDialog.setMessage("正在登入( ﾟ∀ﾟ)o彡ﾟ");
         myProgressDialog.setCancelable(false);
-
     }
 
     private void sendMessageToHandler(int messgae) {
@@ -98,8 +97,8 @@ public class LoginFragment extends Fragment {
     }
 
     private void init() {
-    	getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        MobileAds.initialize(getActivity(),getString(R.string.appAdMob));
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        MobileAds.initialize(getActivity(), getString(R.string.appAdMob));
 
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
@@ -112,7 +111,7 @@ public class LoginFragment extends Fragment {
         try {
             PackageInfo info = manager.getPackageInfo(getActivity().getPackageName(), 0);
             final int appVersion = info.versionCode; //版本號
-            versionName.setText("Ver." +  info.versionName);
+            versionName.setText("Ver." + info.versionName);
             mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
             FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
                     .setDeveloperModeEnabled(BuildConfig.DEBUG)
@@ -133,11 +132,11 @@ public class LoginFragment extends Fragment {
                                         Toast.makeText(getActivity(), "play商店有新版的校務通", Toast.LENGTH_LONG).show();
                                     }
                                     String toast_message = (String) mFirebaseRemoteConfig.getString("toast_message");
-                                    if(!toast_message.equals("")){
+                                    if (!toast_message.equals("")) {
                                         Toast.makeText(getActivity(), toast_message, Toast.LENGTH_SHORT).show();
                                     }
                                     String dialog_message = (String) mFirebaseRemoteConfig.getString("dialog_message");
-                                    if(!dialog_message.equals("")){
+                                    if (!dialog_message.equals("")) {
                                         new AlertDialog.Builder(getActivity())
                                                 .setMessage(dialog_message)
                                                 .setPositiveButton("確定", new DialogInterface.OnClickListener() {

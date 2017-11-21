@@ -26,7 +26,7 @@ public class TrafficActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle(R.string.Traffic);
+            actionBar.setTitle(R.string.traffic);
         }
         taiwanTaxi = (ImageButton) findViewById(R.id.taiwanTaxi);
         honrenTaxi = (ImageButton) findViewById(R.id.honrenTaxi);

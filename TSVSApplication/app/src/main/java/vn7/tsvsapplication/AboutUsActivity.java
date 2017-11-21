@@ -30,8 +30,10 @@ public class AboutUsActivity extends AppCompatActivity  implements View.OnClickL
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
+            // 给左上角加上一个返回的圖示
            actionBar.setDisplayHomeAsUpEnabled(true);
-       //     actionBar.setDisplayShowHomeEnabled(true);
+        //再actionbar顯示Android.R.id.home圖示
+       //  actionBar.setDisplayShowHomeEnabled(true);
         }
         //set github_link
         TextView t = (TextView) findViewById(R.id.github_link);

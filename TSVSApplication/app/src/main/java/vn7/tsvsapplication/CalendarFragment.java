@@ -194,18 +194,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
                 }
                 itemList.add(new CalendarItem("本月尚無更多排定事項", "(,,・ω・,,)已經沒有囉", ""));
                 mListAdapter = new CalendarListAdapter(context, itemList);
-                calendar_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                    @Override
-                    public void onItemClick(AdapterView<?> arg0, View v, int arg2,
-                                            long arg3) {
-                    /*
-                             TextView date = (TextView) v.findViewById(R.id.date);
-                            TextView schedule = (TextView) v.findViewById(R.id.schedule);
-                            */
-                    }
-
-                });
                 sendMessageToHandler(setAdapterList);
                 sendMessageToHandler(endLoading);
 
@@ -226,10 +215,6 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
         loader.start();
     }
 
-    public void onButtonPressed(Uri uri) {
-
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -239,7 +224,6 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onDetach() {
         super.onDetach();
-
     }
 
 }

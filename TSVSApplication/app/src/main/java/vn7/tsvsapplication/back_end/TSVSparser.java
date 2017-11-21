@@ -34,7 +34,6 @@ public class TSVSparser {
     private static final String COOKIES_HEADER = "Set-Cookie";
     private static final String login_fail = "STU=Erroring";
     private static boolean loginStatus = false;
-    public static final boolean sucess = true, fail = false;
     private static final int timeout = 10000;
     private static final String i_Stu_Session_Timeout_title = "【 新北市立淡水商工　學生選單()　V2.2】";
 
@@ -68,7 +67,7 @@ public class TSVSparser {
 
     }
 
-    public static boolean getLoginStatus() {
+    public static boolean isLogin() {
         return loginStatus;
     }
 
@@ -76,7 +75,7 @@ public class TSVSparser {
         number = "";
         password = "";
         cookie = "";
-        loginStatus = fail;
+        loginStatus = true;
     }
 
     public static boolean checkSession() {
@@ -108,7 +107,7 @@ public class TSVSparser {
                 logout();
                 return false;
             } else {
-                loginStatus = sucess;
+                loginStatus = true;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -219,11 +218,7 @@ public class TSVSparser {
         for (int i = 0; i < cookiesHeader.size(); i++) {
             TSVSparser.cookie = TSVSparser.cookie + cookiesHeader.get(i) + ";";
         }
-        /*
-         * for (Map.Entry<String, List<String>> entry : headerFields.entrySet())
-		 * { System.out.println("Key : " + entry.getKey() + " ,Value : " +
-		 * entry.getValue()); }
-		 */
+
         return TSVSparser.cookie;
     }
 

@@ -8,9 +8,9 @@
             android:icon="@drawable/note"
             android:title="@string/campus_information" /><!--校園資訊-->
         <item
-            android:id="@+id/school_timetable"
+            android:id="@+id/cowbei_school"
             android:icon="@drawable/notepad"
-            android:title="@string/school_timetable" />
+            android:title="@string/cowbei_school" />
         <item
             android:id="@+id/semester_results"
             android:icon="@drawable/smartphone"
@@ -22,11 +22,11 @@
         <item
             android:id="@+id/OnlineRepair"
             android:icon="@drawable/success"
-            android:title="@string/OnlineRepair" />
+            android:title="@string/onlineRepair" />
         <item
             android:id="@+id/Traffic"
             android:icon="@drawable/bus"
-            android:title="@string/Traffic" />
+            android:title="@string/traffic" />
 
         <item
             android:id="@+id/about_us"
@@ -38,18 +38,4 @@
             android:title="@string/sing_out" />
     </group>
 
-
-    <!-- <item android:title="Communicate">
-         <menu>
-             <item
-                 android:id="@+id/nav_share"
-                 android:icon="@drawable/ic_menu_share"
-                 android:title="Share" />
-             <item
-                 android:id="@+id/nav_send"
-                 android:icon="@drawable/ic_menu_send"
-                 android:title="Send" />
-         </menu>
-     </item>
- -->
 </menu>

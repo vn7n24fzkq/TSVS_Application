@@ -61,13 +61,7 @@ public class PastYearsResultsFragment extends ViewPageFragment {
             }
         });
     }
- /*   private void setGradeSelect(String compareValue){
 
-        if (!compareValue.equals(null)) {
-            int spinnerPosition = adapter.getPosition(compareValue);
-            gradeSelect.setSelection(spinnerPosition);
-        }
-    }*/
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -179,7 +173,6 @@ public class PastYearsResultsFragment extends ViewPageFragment {
         TableRow.LayoutParams view = new TableRow.LayoutParams(
                 TableRow.LayoutParams.WRAP_CONTENT,
                 TableRow.LayoutParams.WRAP_CONTENT);
-       // TableRow.LayoutParams view = (TableRow.LayoutParams)new TableRow(getActivity()).getLayoutParams();
         view.span = 5;
         tablerowItem = inflater.inflate(R.layout.tablerow_item, null);
         text = (TextView) tablerowItem.findViewById(R.id.tablerow_text);

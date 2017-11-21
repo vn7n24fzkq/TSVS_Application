@@ -10,11 +10,11 @@
     <string name="click_to_login">點擊登入</string>
     <!--menu  -->
     <string name="campus_information">行事曆</string>
-    <string name="school_timetable">靠北淡商</string>
+    <string name="cowbei_school">靠北淡商</string>
     <string name="semester_results">學期成績</string>
     <string name="lack_of_records">學期記錄</string>
-    <string name="OnlineRepair">線上報修</string>
-    <string name="Traffic">交通資訊</string>
+    <string name="onlineRepair">線上報修</string>
+    <string name="traffic">交通資訊</string>
     <string name="about_us">關於我們</string>
     <string name="sing_out">登出</string>
     <string name="close">關閉</string>
@@ -346,5 +346,5 @@ limitations under the License."
     <string name="title_activity_about_us">AboutUsActivity</string>
     <string name="title_activity_traffic">TrafficActivity</string>
 
-    <!-- <string name="action_settings">Settings</string>-->
+
 </resources>

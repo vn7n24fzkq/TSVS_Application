@@ -38,7 +38,7 @@ import vn7.tsvsapplication.back_end.weather.WeekWeather;
 
 
 public class WelcomFragment extends Fragment {
-    private TabLayout tabLayout;
+
 
 
     private RecyclerView weather_list;
@@ -145,7 +145,6 @@ public class WelcomFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_welcom, container, false);
-        tabLayout = (TabLayout) v.findViewById(R.id.tab_layout);
         calendar_list = (ListView) v.findViewById(R.id.calendar_list);
         weather_list = (RecyclerView) v.findViewById(R.id.weather_list);
         calendarRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.calendar_refresh_layout);
@@ -197,7 +196,7 @@ public class WelcomFragment extends Fragment {
         Context context;
         String year, month;
 
-        public CalendarLoader(Context context, String year, String month) {
+        private CalendarLoader(Context context, String year, String month) {
             this.context = context;
             this.year = year;
             this.month = month;
@@ -236,14 +235,14 @@ public class WelcomFragment extends Fragment {
 }
 
 class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {
-    final ArrayList<WeekWeather> weatherList;
+    private final ArrayList<WeekWeather> weatherList;
 
     public MainAdapter(ArrayList<WeekWeather> weatherList) {
         this.weatherList = weatherList;
     }
 
 
-    int opened = -1;
+    private int opened = -1;
 
 
     @Override
@@ -266,17 +265,17 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {
     public class MainViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
-        public final TextView day;
-        public final TextView pop;
-        public final TextView temprature;
-        public final TextView UCV;
-        public final TextView infos;
-        public final LinearLayout weather_item;
+        private final TextView day;
+        private final TextView pop;
+        private final TextView temprature;
+        private final TextView UCV;
+        private final TextView infos;
+        private final LinearLayout weather_item;
         SimpleDateFormat sdfor = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat sdFormat = new SimpleDateFormat("MM/dd  HH時 \n EEE");
 
 
-        public MainViewHolder(ViewGroup itemView) {
+        private MainViewHolder(ViewGroup itemView) {
             super(itemView);
             weather_item =(LinearLayout)itemView.findViewById(R.id. weather_item);
             day = ((TextView) itemView.findViewById(R.id.day));
@@ -290,7 +289,7 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {
         }
 
 
-        public void bind(int pos) {
+        private void bind(int pos) {
 
             WeekWeather weather = weatherList.get(pos);
             try {
