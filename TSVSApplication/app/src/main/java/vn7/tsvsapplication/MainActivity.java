@@ -173,7 +173,10 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.campus_information) {    //行事曆
             toolbar.setTitle(getResources().getString(R.string.campus_information));
             switchFragment(new CalendarFragment());
-        } else if (id == R.id.cowbei_school) {  //靠北淡商
+        } else if (id == R.id.tamsui_weather) {  //靠北淡商
+            toolbar.setTitle(getResources().getString(R.string.tamsui_weather));
+            switchFragment(new WelcomFragment());
+        }else if (id == R.id.cowbei_school) {  //靠北淡商
             toolbar.setTitle(getResources().getString(R.string.cowbei_school));
             switchFragment(TabFragment.newInstance(getResources().getStringArray(R.array.cowbei_array)));
         } else if (id == R.id.semester_results) {   //學期成績

@@ -85,33 +85,6 @@
                 android:layout_height="wrap_content"
                 android:scrollbars="vertical" />
         </android.support.v4.widget.SwipeRefreshLayout>
-        <TextView
-            android:id="@+id/calendar_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            android:text="行事曆"
-            android:gravity="center"
-            android:textColor="@color/windowBackground"
-            android:textSize="@dimen/fab_margin"/>
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/calendar_refresh_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_weight="1"
-            android:background="@drawable/shape_rectangle_table">
-
-            <ListView
-                android:id="@+id/calendar_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:scrollbars="vertical" />
-        </android.support.v4.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 

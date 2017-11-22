@@ -6,7 +6,11 @@
         <item
             android:id="@+id/campus_information"
             android:icon="@drawable/note"
-            android:title="@string/campus_information" /><!--校園資訊-->
+            android:title="@string/campus_information" />
+        <item
+            android:id="@+id/tamsui_weather"
+            android:icon="@drawable/weather"
+            android:title="@string/tamsui_weather" />
         <item
             android:id="@+id/cowbei_school"
             android:icon="@drawable/notepad"

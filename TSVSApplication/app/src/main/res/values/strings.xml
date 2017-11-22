@@ -10,6 +10,7 @@
     <string name="click_to_login">點擊登入</string>
     <!--menu  -->
     <string name="campus_information">行事曆</string>
+    <string name="tamsui_weather">淡水天氣</string>
     <string name="cowbei_school">靠北淡商</string>
     <string name="semester_results">學期成績</string>
     <string name="lack_of_records">學期記錄</string>
