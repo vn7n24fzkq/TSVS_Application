@@ -42,7 +42,7 @@ public class WelcomFragment extends Fragment {
 
 
     private RecyclerView weather_list;
-    private CalendarListAdapter mListAdapter;
+
     private SwipeRefreshLayout  weatherRefreshLayout;
 
 
@@ -52,29 +52,7 @@ public class WelcomFragment extends Fragment {
     private final byte setAdapterList = 0x03;
     private final byte weatherRefresh = 0x05;
 
-    Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            int Adapter = msg.arg1, loadStatus = msg.what;
-            switch (Adapter) {
-                case weatherRefresh:
-                    if (msg.what == setAdapterList) {
-                        final MainAdapter adapter = new MainAdapter((ArrayList<WeekWeather>) msg.obj);
-                        weather_list.setAdapter(adapter);
-                        sendMessageToHandler(weatherRefresh, endLoading);
-                        //  calendar_list.setAdapter(mListAdapter);
-                    } else if (msg.what == startLoading) {
-                        weatherRefreshLayout.setRefreshing(true);
-                    } else if (msg.what == endLoading) {
-                        weatherRefreshLayout.setRefreshing(false);
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
+    Handler mHandler;
 
     private void init() {
 
@@ -121,7 +99,33 @@ public class WelcomFragment extends Fragment {
         super.onAttach(context);
 
     }
-
+    @Override
+    public void onStart(){
+        super.onStart();
+         mHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                int Adapter = msg.arg1, loadStatus = msg.what;
+                switch (Adapter) {
+                    case weatherRefresh:
+                        if (msg.what == setAdapterList) {
+                            final MainAdapter adapter = new MainAdapter((ArrayList<WeekWeather>) msg.obj);
+                            weather_list.setAdapter(adapter);
+                            sendMessageToHandler(weatherRefresh, endLoading);
+                            //  calendar_list.setAdapter(mListAdapter);
+                        } else if (msg.what == startLoading) {
+                            weatherRefreshLayout.setRefreshing(true);
+                        } else if (msg.what == endLoading) {
+                            weatherRefreshLayout.setRefreshing(false);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+    }
     @Override
     public void onDetach() {
         super.onDetach();

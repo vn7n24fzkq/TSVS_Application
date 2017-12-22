@@ -50,35 +50,7 @@ public class LoginFragment extends Fragment {
     private final String pre_password = "password";
     public final byte startLoading = 0x01;
     public final byte endLoading = 0x02;
-    Handler loginHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == startLoading) {
-                myProgressDialog.show();
-            } else if (msg.what == endLoading) {
-                myProgressDialog.dismiss();
-                if (TSVSparser.isLogin()) {
-                    getActivity().runOnUiThread(new Runnable() {
-                        public void run() {
-                            Toast.makeText(getActivity(), "登入成功ヽ(✿ﾟ▽ﾟ)ノ", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    Log.d("Login", "登入成功ヽ(✿ﾟ▽ﾟ)ノ");
-                    MainActivity.loadStuInfo();
-                    getFragmentManager().beginTransaction().replace(R.id.content_main, new WelcomFragment()).commit();
-                } else {
-                    if (NetworkService.isConnected())
-                        getActivity().runOnUiThread(new Runnable() {
-                            public void run() {
-                                Toast.makeText(getActivity(), "登入失敗,請檢查帳號密碼是否正確", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    Log.d("Login", "登入失敗・゜・(PД`q｡)・゜・");
-                }
-            }
-            super.handleMessage(msg);
-        }
-    };
+    Handler loginHandler;
 
     private void setProgressDialog() {
         myProgressDialog = new ProgressDialog(getActivity(), R.style.AppCompatAlertDialogStyle);
@@ -187,6 +159,39 @@ public class LoginFragment extends Fragment {
         setProgressDialog();
         // Inflate the layout for this fragment
         return v;
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        loginHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == startLoading) {
+                    myProgressDialog.show();
+                } else if (msg.what == endLoading) {
+                    myProgressDialog.dismiss();
+                    if (TSVSparser.isLogin()) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(getActivity(), "登入成功ヽ(✿ﾟ▽ﾟ)ノ", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        Log.d("Login", "登入成功ヽ(✿ﾟ▽ﾟ)ノ");
+                        MainActivity.loadStuInfo();
+                        getFragmentManager().beginTransaction().replace(R.id.content_main, new WelcomFragment()).commit();
+                    } else {
+                        if (NetworkService.isConnected())
+                            getActivity().runOnUiThread(new Runnable() {
+                                public void run() {
+                                    Toast.makeText(getActivity(), "登入失敗,請檢查帳號密碼是否正確", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        Log.d("Login", "登入失敗・゜・(PД`q｡)・゜・");
+                    }
+                }
+                super.handleMessage(msg);
+            }
+        };
     }
 
     private void login() {

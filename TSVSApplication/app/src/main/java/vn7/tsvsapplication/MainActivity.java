@@ -60,17 +60,8 @@ public class MainActivity extends AppCompatActivity
         }
     };
     //session timeout handle
-    private final byte session_timeout = 0x01;
-    Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == session_timeout) {
-                sign_out(false);
-                intoLogin();
-            }
-        }
-    };
+    private static final byte session_timeout = 0x01;
+    Handler mHandler;
 
     public void sendMessageToHandler(int messgae) {
         Message msg = mHandler.obtainMessage();
@@ -123,7 +114,20 @@ public class MainActivity extends AppCompatActivity
         intoLogin();
 
     }
-
+    @Override
+    public void onResume(){
+        super.onResume();
+        mHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if (msg.what == session_timeout) {
+                    sign_out(false);
+                    intoLogin();
+                }
+            }
+        };
+    }
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         //螢幕改變方向
@@ -304,6 +308,8 @@ public class MainActivity extends AppCompatActivity
                     String name = (String) jobject.get("name");
                     setStuInfo(classs, class_number, stu_number, name);
                 } catch (IOException e) {
+                    e.printStackTrace();
+                }catch (Exception e) {
                     e.printStackTrace();
                 }
             }

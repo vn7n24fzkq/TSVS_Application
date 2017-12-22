@@ -125,36 +125,34 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
+        mHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if (msg.what == setAdapterList) {
+                    calendar_list.setAdapter(mListAdapter);
+                } else if (msg.what == startLoading) {
+                    Toast.makeText(getActivity(), "努力載入中─=≡Σ((( つ•̀ω•́)つ", Toast.LENGTH_SHORT).show();
+                    mSwipeRefreshLayout.setRefreshing(true);
+                } else if (msg.what == endLoading) {
+                    mSwipeRefreshLayout.setRefreshing(false);
+                }
 
+            }
+        };
     }
 
 
     private final byte startLoading = 0x01;
     private final byte endLoading = 0x02;
     private final byte setAdapterList = 0x03;
-    Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == setAdapterList) {
-                calendar_list.setAdapter(mListAdapter);
-            } else if (msg.what == startLoading) {
-                Toast.makeText(getActivity(), "努力載入中─=≡Σ((( つ•̀ω•́)つ", Toast.LENGTH_SHORT).show();
-                mSwipeRefreshLayout.setRefreshing(true);
-            } else if (msg.what == endLoading) {
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-
-        }
-    };
-
+    Handler mHandler;
     @Override
     public void onClick(View v) {
         if (v == editText_calendar) {
             datePickerDialog.show();
         }
     }
-
     class CalendarLoader extends Thread {
         Context context;
         String year, month;
