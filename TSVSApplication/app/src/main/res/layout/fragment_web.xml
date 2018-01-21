@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_webview"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="vn7.tsvsapplication.WebviewActivity">
+    android:layout_height="match_parent">
     <vn7.tsvsapplication.base.ProgressWebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
