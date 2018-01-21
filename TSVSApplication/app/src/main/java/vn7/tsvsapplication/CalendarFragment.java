@@ -1,5 +1,7 @@
 package vn7.tsvsapplication;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -9,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 
+import android.os.Looper;
 import android.os.Message;
 import android.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -29,6 +32,7 @@ import android.widget.Toast;
 import org.json.simple.*;
 
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -42,13 +46,13 @@ import vn7.tsvsapplication.base.CalendarItem;
 
 public class CalendarFragment extends Fragment implements View.OnClickListener {
 
-    private ListView calendar_list;
-    private CalendarListAdapter mListAdapter;
+    private static ListView calendar_list;
+    private static CalendarListAdapter mListAdapter;
     private Button search;
     private EditText editText_calendar;
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy年MM月", Locale.TAIWAN);
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private static SwipeRefreshLayout mSwipeRefreshLayout;
 
     public CalendarFragment() {
 
@@ -125,28 +129,27 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        mHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                if (msg.what == setAdapterList) {
-                    calendar_list.setAdapter(mListAdapter);
-                } else if (msg.what == startLoading) {
-                    Toast.makeText(getActivity(), "努力載入中─=≡Σ((( つ•̀ω•́)つ", Toast.LENGTH_SHORT).show();
-                    mSwipeRefreshLayout.setRefreshing(true);
-                } else if (msg.what == endLoading) {
-                    mSwipeRefreshLayout.setRefreshing(false);
-                }
-
-            }
-        };
     }
 
 
-    private final byte startLoading = 0x01;
-    private final byte endLoading = 0x02;
-    private final byte setAdapterList = 0x03;
-    Handler mHandler;
+    private final static byte startLoading = 0x01;
+    private final static byte endLoading = 0x02;
+    private final static byte setAdapterList = 0x03;
+    public static class MyHandler extends Handler {
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == setAdapterList) {
+                calendar_list.setAdapter(mListAdapter);
+            } else if (msg.what == startLoading) {
+                mSwipeRefreshLayout.setRefreshing(true);
+            } else if (msg.what == endLoading) {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        }
+    };
+    private final static MyHandler mHandler = new MyHandler();
     @Override
     public void onClick(View v) {
         if (v == editText_calendar) {

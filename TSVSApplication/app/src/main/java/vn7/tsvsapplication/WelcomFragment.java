@@ -41,19 +41,40 @@ public class WelcomFragment extends Fragment {
 
 
 
-    private RecyclerView weather_list;
+    private static RecyclerView weather_list;
 
-    private SwipeRefreshLayout  weatherRefreshLayout;
+    private static SwipeRefreshLayout  weatherRefreshLayout;
 
 
 
-    private final byte startLoading = 0x01;
-    private final byte endLoading = 0x02;
-    private final byte setAdapterList = 0x03;
-    private final byte weatherRefresh = 0x05;
-
-    Handler mHandler;
-
+    private static final byte startLoading = 0x01;
+    private static final byte endLoading = 0x02;
+    private static  final byte setAdapterList = 0x03;
+    private static final byte weatherRefresh = 0x05;
+    private static class MyHandler extends Handler{
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            int Adapter = msg.arg1, loadStatus = msg.what;
+            switch (Adapter) {
+                case weatherRefresh:
+                    if (msg.what == setAdapterList) {
+                        final MainAdapter adapter = new MainAdapter((ArrayList<WeekWeather>) msg.obj);
+                        weather_list.setAdapter(adapter);
+                        sendMessageToHandler(weatherRefresh, endLoading);
+                        //  calendar_list.setAdapter(mListAdapter);
+                    } else if (msg.what == startLoading) {
+                        weatherRefreshLayout.setRefreshing(true);
+                    } else if (msg.what == endLoading) {
+                        weatherRefreshLayout.setRefreshing(false);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    private final static MyHandler mHandler = new MyHandler();
     private void init() {
 
         weather_list.getItemAnimator().setChangeDuration(300);
@@ -102,29 +123,6 @@ public class WelcomFragment extends Fragment {
     @Override
     public void onStart(){
         super.onStart();
-         mHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                int Adapter = msg.arg1, loadStatus = msg.what;
-                switch (Adapter) {
-                    case weatherRefresh:
-                        if (msg.what == setAdapterList) {
-                            final MainAdapter adapter = new MainAdapter((ArrayList<WeekWeather>) msg.obj);
-                            weather_list.setAdapter(adapter);
-                            sendMessageToHandler(weatherRefresh, endLoading);
-                            //  calendar_list.setAdapter(mListAdapter);
-                        } else if (msg.what == startLoading) {
-                            weatherRefreshLayout.setRefreshing(true);
-                        } else if (msg.what == endLoading) {
-                            weatherRefreshLayout.setRefreshing(false);
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            }
-        };
     }
     @Override
     public void onDetach() {
@@ -154,7 +152,7 @@ public class WelcomFragment extends Fragment {
 
 
 
-    private void sendMessageToHandler(int refreshLayout, int messgae) {
+    private static void sendMessageToHandler(int refreshLayout, int messgae) {
         Message msg = mHandler.obtainMessage();
         msg.arg1 = refreshLayout;
         msg.what = messgae;
