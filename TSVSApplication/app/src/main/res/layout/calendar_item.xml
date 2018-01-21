@@ -18,12 +18,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/color_tag"
-        android:layout_toRightOf="@+id/color_tag"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:text="schedule"
         android:textAllCaps="false"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -31,12 +29,10 @@
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/color_tag"
-        android:layout_toRightOf="@+id/color_tag"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:layout_below="@+id/schedule"
         android:text="date"
-        android:textColor="#6e6e6e"
+        android:textColor="#FFFFFF"
         android:textSize="20sp" />
 
     <TextView
@@ -44,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/department"
-        android:textColor="#6e6e6e"
+        android:textColor="#FFFFFF"
         android:textSize = "20sp"
 
         android:paddingRight="@dimen/activity_horizontal_margin"

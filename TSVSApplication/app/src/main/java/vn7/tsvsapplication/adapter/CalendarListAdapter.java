@@ -44,13 +44,11 @@ public class CalendarListAdapter extends BaseAdapter {
         TextView date;
         TextView schedule;
         TextView department;
-        View colorTag;
 
-        public ViewHolder(TextView date, TextView schedule, TextView department, View colorTag) {
+        public ViewHolder(TextView date, TextView schedule, TextView department) {
             this.date = date;
             this.schedule = schedule;
             this.department = department;
-            this.colorTag = colorTag;
         }
     }
 
@@ -61,7 +59,7 @@ public class CalendarListAdapter extends BaseAdapter {
             convertView = myInflater.inflate(R.layout.calendar_item, null);
             holder = new ViewHolder((TextView) convertView.findViewById(R.id.date),
                     (TextView) convertView.findViewById(R.id.schedule),
-                    (TextView) convertView.findViewById(R.id.department), convertView.findViewById(R.id.color_tag));
+                    (TextView) convertView.findViewById(R.id.department));
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -71,14 +69,7 @@ public class CalendarListAdapter extends BaseAdapter {
         holder.date.setText(item.getDate());
         holder.schedule.setText(item.getSchedule());
         holder.department.setText(item.getDepartment());
-        //set tag color
-        try {
-            int date = Integer.valueOf(item.getDate().substring(item.getDate().indexOf("月") + 1, item.getDate().indexOf("日")));
-            int[] rainbow = convertView.getResources().getIntArray(R.array.color_circle);
-            holder.colorTag.setBackgroundColor(rainbow[date % rainbow.length]);
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
+
         return convertView;
     }
 }
