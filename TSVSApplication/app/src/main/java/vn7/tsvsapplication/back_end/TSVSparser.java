@@ -148,7 +148,7 @@ public class TSVSparser {
         httpConn.setRequestProperty("Host", " csv.tsvs.ntpc.edu.tw");
         httpConn.setRequestProperty("Referer", "http://csv.tsvs.ntpc.edu.tw/csn/stu.asp?CHOICE=OK");
         httpConn.setRequestProperty("User-Agent",
-                "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; rctw; InfoPath.3; Creative AutoUpdate v1.41.09)");
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36");
         httpConn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         httpConn.setRequestProperty("Cache-Control", "no-cache");
         httpConn.setRequestProperty("Connection", "Keep-Alive");
