@@ -206,18 +206,18 @@ public class MainActivity extends AppCompatActivity
             intent.setClass(MainActivity.this, OnlineRepairActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.Traffic) {        //交通資訊
-            Intent intent = new Intent();
-            intent.setClass(MainActivity.this, TrafficActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.about_us) {       //關於我們
+        }else if (id == R.id.about_us) {       //關於我們
             Intent intent = new Intent();
             intent.setClass(MainActivity.this, AboutUsActivity.class);
             startActivity(intent);
         } else if (id == R.id.sign_out) {       //登出
             sign_out(true);
             intoLogin();
-        }
+        }/* else if (id == R.id.Traffic) {        //交通資訊
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this, TrafficActivity.class);
+            startActivity(intent);
+        } */
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
