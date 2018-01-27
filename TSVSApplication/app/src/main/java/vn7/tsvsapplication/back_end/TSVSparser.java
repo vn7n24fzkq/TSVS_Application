@@ -75,7 +75,7 @@ public class TSVSparser {
         number = "";
         password = "";
         cookie = "";
-        loginStatus = true;
+        loginStatus = false;
     }
 
     public static boolean checkSession() {
@@ -94,7 +94,7 @@ public class TSVSparser {
     }
 
     public static boolean login(String number, String password) {
-        if (loginStatus == true) {
+        if (loginStatus) {
             init();
         }
         String cookies;
