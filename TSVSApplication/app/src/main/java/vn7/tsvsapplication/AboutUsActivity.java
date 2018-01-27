@@ -47,6 +47,9 @@ public class AboutUsActivity extends AppCompatActivity  implements View.OnClickL
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle faBundle = new Bundle();
+                faBundle.putString(FirebaseAnalytics.Param.ITEM_NAME,"fab");
+                mFirebaseAnalytics.logEvent( "onClick", faBundle);
                 Intent intent = new Intent();
                 intent.setClass(AboutUsActivity.this, OpenSourceActivity.class);
                 startActivity(intent);
@@ -77,7 +80,9 @@ public class AboutUsActivity extends AppCompatActivity  implements View.OnClickL
     }
     @Override
     public void onBackPressed() {
-            super.onBackPressed();
+        super.onBackPressed();
+        Bundle faBundle = new Bundle();
+        mFirebaseAnalytics.logEvent( "onBackPressed", faBundle);
     }
 
     @Override

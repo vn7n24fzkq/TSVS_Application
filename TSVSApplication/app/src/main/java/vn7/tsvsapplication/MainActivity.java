@@ -162,7 +162,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onPause(){
         super.onPause();
-        unregisterReceiver(receiver);
+        try {
+            unregisterReceiver(receiver);
+        }catch (Exception e){
+            e.getStackTrace();
+        }
     }
     @Override
     public void onDestroy() {

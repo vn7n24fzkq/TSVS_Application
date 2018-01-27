@@ -175,6 +175,9 @@ public class LoginFragment extends Fragment {
                     myProgressDialog.show();
                 } else if (msg.what == endLoading) {
                     myProgressDialog.dismiss();
+                    Bundle faBundle = new Bundle();
+                    faBundle.putString(FirebaseAnalytics.Param.VALUE,String.valueOf(TSVSparser.isLogin()));
+                    mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN, faBundle);
                     if (TSVSparser.isLogin()) {
                         getActivity().runOnUiThread(new Runnable() {
                             public void run() {
@@ -193,9 +196,6 @@ public class LoginFragment extends Fragment {
                             });
                         Log.d("Login", "登入失敗・゜・(PД`q｡)・゜・");
                     }
-                    Bundle faBundle = new Bundle();
-                    faBundle.putString(FirebaseAnalytics.Param.VALUE,String.valueOf(TSVSparser.isLogin()));
-                    mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN, faBundle);
                 }
                 super.handleMessage(msg);
             }
