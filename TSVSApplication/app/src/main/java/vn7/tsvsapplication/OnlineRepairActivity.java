@@ -16,29 +16,29 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import vn7.tsvsapplication.back_end.NetworkService;
 import vn7.tsvsapplication.back_end.TSVSparser;
 import vn7.tsvsapplication.base.ProgressWebView;
 
 public class OnlineRepairActivity extends AppCompatActivity {
     private ProgressWebView myWebView;
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     public OnlineRepairActivity(){
 
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-      //  getSupportActionBar().hide(); //隱藏標題
-      //  getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_online_repair);
-          // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        // setSupportActionBar(toolbar);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
              actionBar.setTitle("線上報修");
-            //    actionBar.setDisplayShowTitleEnabled(false);
         }
         myWebView = (ProgressWebView) findViewById(R.id.webview);
         myWebView.getSettings().setJavaScriptEnabled(true);
@@ -55,12 +55,15 @@ public class OnlineRepairActivity extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Bundle faBundle = new Bundle();
         switch (item.getItemId()) {
             case android.R.id.home:
                 // app icon in action bar clicked; goto parent activity.
+                faBundle.putString(FirebaseAnalytics.Param.ITEM_NAME,"home");
                 this.finish();
                 return true;
             case R.id.download:
+                faBundle.putString(FirebaseAnalytics.Param.ITEM_NAME,"download");
                 if(NetworkService.isConnected()) {
                     new AlertDialog.Builder(OnlineRepairActivity.this)
                             .setMessage("下載目前線上報修結果")
@@ -84,11 +87,13 @@ public class OnlineRepairActivity extends AppCompatActivity {
             default:
                 break;
         }
-
+        mFirebaseAnalytics.logEvent("onOptionsItemSelected", faBundle);
         return true;
     }
     @Override
     public void onBackPressed() {
+        Bundle faBundle = new Bundle();
+        mFirebaseAnalytics.logEvent("onBackPressed", faBundle);
         if (myWebView.canGoBack()) {
             myWebView.goBack();
         } else {

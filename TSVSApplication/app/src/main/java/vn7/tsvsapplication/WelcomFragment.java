@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -39,13 +40,9 @@ import vn7.tsvsapplication.back_end.weather.WeekWeather;
 
 public class WelcomFragment extends Fragment {
 
-
-
     private static RecyclerView weather_list;
-
     private static SwipeRefreshLayout  weatherRefreshLayout;
-
-
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     private static final byte startLoading = 0x01;
     private static final byte endLoading = 0x02;
@@ -110,7 +107,7 @@ public class WelcomFragment extends Fragment {
         weather_list = (RecyclerView) v.findViewById(R.id.weather_list);
         weatherRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.weather_refresh_layout);
         init();
-
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
         weather_refresh();
         return v;
     }
@@ -131,6 +128,8 @@ public class WelcomFragment extends Fragment {
     }
 
     private void weather_refresh() {
+        Bundle faBundle = new Bundle();
+        mFirebaseAnalytics.logEvent("weather_refresh", faBundle);
         Thread th = new Thread() {
             @Override
             public void run() {

@@ -11,7 +11,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:text="schedule"
         android:textAllCaps="false"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/textColorPrimary"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -22,7 +22,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:layout_below="@+id/schedule"
         android:text="date"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/textColorPrimary"
         android:textSize="20sp" />
 
     <TextView
@@ -30,9 +30,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/department"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/textColorPrimary"
         android:textSize = "20sp"
-
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:textAllCaps="false"
         android:layout_below="@+id/schedule"

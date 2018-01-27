@@ -8,12 +8,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-public class OpenSourceActivity extends AppCompatActivity implements View.OnClickListener {
+import com.google.firebase.analytics.FirebaseAnalytics;
 
+public class OpenSourceActivity extends AppCompatActivity implements View.OnClickListener {
+    private FirebaseAnalytics mFirebaseAnalytics;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_source);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -24,22 +27,24 @@ public class OpenSourceActivity extends AppCompatActivity implements View.OnClic
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+        Bundle faBundle = new Bundle();
+            switch (item.getItemId()) {
             case android.R.id.home:
                 // app icon in action bar clicked; goto parent activity.
+                faBundle.putString(FirebaseAnalytics.Param.ITEM_NAME,"home");
                 this.finish();
                 return true;
             default:
                 break;
         }
+        mFirebaseAnalytics.logEvent("onBackPressed", faBundle);
         return true;
     }
     @Override
     public void onBackPressed() {
-
+        Bundle faBundle = new Bundle();
+        mFirebaseAnalytics.logEvent("onBackPressed", faBundle);
         super.onBackPressed();
-
-
     }
 
     @Override

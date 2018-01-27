@@ -16,6 +16,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -30,13 +32,16 @@ public class ViewPageFragment extends Fragment{
     public TextView title, remindText;
     public SwipeRefreshLayout mSwipeRefreshLayout;
     public ArrayList<TextView> textArray = new ArrayList<>();
-
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     public void init() {
         mSwipeRefreshLayout.setColorSchemeResources(R.color.red, R.color.orange, R.color.green, R.color.blue);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                Bundle faBundle = new Bundle();
+                faBundle.putString("action","onRefresh");
+                mFirebaseAnalytics.logEvent("viewPageFragment", faBundle);
                 loadScore();
             }
         });
@@ -46,7 +51,7 @@ public class ViewPageFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -16,6 +16,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -29,12 +31,12 @@ public class PastYearsResultsFragment extends ViewPageFragment {
 
 
     private Spinner gradeSelect;
-
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
     }
     @Override
     public void init(){
@@ -42,6 +44,9 @@ public class PastYearsResultsFragment extends ViewPageFragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                Bundle faBundle = new Bundle();
+                faBundle.putString("action","onRefresh");
+                mFirebaseAnalytics.logEvent("pastYearsResults", faBundle);
                 loadScore(gradeSelect.getSelectedItemPosition());
             }
         });
@@ -53,6 +58,9 @@ public class PastYearsResultsFragment extends ViewPageFragment {
         gradeSelect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Bundle faBundle = new Bundle();
+                faBundle.putString(FirebaseAnalytics.Param.VALUE,String.valueOf(position));
+                mFirebaseAnalytics.logEvent("pastYearsResults", faBundle);
                 loadScore(position);
             }
             @Override

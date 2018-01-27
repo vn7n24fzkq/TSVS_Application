@@ -29,6 +29,7 @@ import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
@@ -51,7 +52,7 @@ public class LoginFragment extends Fragment {
     public final byte startLoading = 0x01;
     public final byte endLoading = 0x02;
     Handler loginHandler;
-
+    private FirebaseAnalytics mFirebaseAnalytics;
     private void setProgressDialog() {
         myProgressDialog = new ProgressDialog(getActivity(), R.style.AppCompatAlertDialogStyle);
         myProgressDialog.setMessage("正在登入( ﾟ∀ﾟ)o彡ﾟ");
@@ -136,6 +137,10 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
+        Bundle faBundle = new Bundle();
+        faBundle.putString(FirebaseAnalytics.Param.CONTENT,"Login");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, faBundle);
     }
 
     @Override
@@ -188,6 +193,9 @@ public class LoginFragment extends Fragment {
                             });
                         Log.d("Login", "登入失敗・゜・(PД`q｡)・゜・");
                     }
+                    Bundle faBundle = new Bundle();
+                    faBundle.putString(FirebaseAnalytics.Param.VALUE,String.valueOf(TSVSparser.isLogin()));
+                    mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN, faBundle);
                 }
                 super.handleMessage(msg);
             }

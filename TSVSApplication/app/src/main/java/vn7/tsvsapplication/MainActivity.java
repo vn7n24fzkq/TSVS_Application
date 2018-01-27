@@ -24,7 +24,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdView;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.json.simple.JSONObject;
 
@@ -37,6 +37,7 @@ import vn7.tsvsapplication.base.TabFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+    private FirebaseAnalytics mFirebaseAnalytics;
     private View nav_header;
     private static TextView user_id, user_name, class_number;
     private CoordinatorLayout coordinatorLayout;
@@ -110,6 +111,7 @@ public class MainActivity extends AppCompatActivity
         setNav_headerView();
         //初始化
         init();
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         //進入登入頁面
         intoLogin();
 
@@ -117,6 +119,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onResume(){
         super.onResume();
+        Bundle faBundle = new Bundle();
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, faBundle);
         mHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -132,12 +136,6 @@ public class MainActivity extends AppCompatActivity
     public void onConfigurationChanged(Configuration newConfig) {
         //螢幕改變方向
         super.onConfigurationChanged(newConfig);
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-
-        }
-
     }
 
     @Override
@@ -147,7 +145,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -176,19 +173,22 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here..
-
         int id = item.getItemId();
-
+        Bundle faBundle = new Bundle();
         if (id == R.id.campus_information) {    //行事曆
+            faBundle.putString(FirebaseAnalytics.Param.ITEM_NAME,getResources().getString(R.string.campus_information));
             toolbar.setTitle(getResources().getString(R.string.campus_information));
             switchFragment(new CalendarFragment());
         } else if (id == R.id.tamsui_weather) {  //靠北淡商
+            faBundle.putString(FirebaseAnalytics.Param.ITEM_NAME,getResources().getString(R.string.tamsui_weather));
             toolbar.setTitle(getResources().getString(R.string.tamsui_weather));
             switchFragment(new WelcomFragment());
         }else if (id == R.id.cowbei_school) {  //靠北淡商
+            faBundle.putString(FirebaseAnalytics.Param.ITEM_NAME,getResources().getString(R.string.cowbei_school));
             toolbar.setTitle(getResources().getString(R.string.cowbei_school));
             switchFragment(TabFragment.newInstance(getResources().getStringArray(R.array.cowbei_array)));
         } else if (id == R.id.semester_results) {   //學期成績
+            faBundle.putString(FirebaseAnalytics.Param.ITEM_NAME,getResources().getString(R.string.semester_results));
             if (TSVSparser.isLogin()) {
                 checkSession();
                 toolbar.setTitle(getResources().getString(R.string.semester_results));
@@ -198,6 +198,7 @@ public class MainActivity extends AppCompatActivity
                 intoLogin();
             }
         } else if (id == R.id.lack_of_records) { //學期記錄
+            faBundle.putString(FirebaseAnalytics.Param.ITEM_NAME,getResources().getString(R.string.lack_of_records));
             if (TSVSparser.isLogin()) {
                 checkSession();
                 toolbar.setTitle(getResources().getString(R.string.lack_of_records));
@@ -207,23 +208,29 @@ public class MainActivity extends AppCompatActivity
                 intoLogin();
             }
         } else if (id == R.id.OnlineRepair) {   //線上報修
+            faBundle.putString(FirebaseAnalytics.Param.ITEM_NAME,getResources().getString(R.string.onlineRepair));
             Intent intent = new Intent();
             intent.setClass(MainActivity.this, OnlineRepairActivity.class);
             startActivity(intent);
 
         }else if (id == R.id.about_us) {       //關於我們
+            faBundle.putString(FirebaseAnalytics.Param.ITEM_NAME,getResources().getString(R.string.about_us));
             Intent intent = new Intent();
             intent.setClass(MainActivity.this, AboutUsActivity.class);
             startActivity(intent);
         } else if (id == R.id.sign_out) {       //登出
+            faBundle.putString(FirebaseAnalytics.Param.ITEM_NAME,getResources().getString(R.string.sing_out));
             sign_out(true);
             intoLogin();
         }/* else if (id == R.id.Traffic) {        //交通資訊
+        faBundle.putString(FirebaseAnalytics.Param.ITEM_NAME,getResources().getString());
             Intent intent = new Intent();
             intent.setClass(MainActivity.this, TrafficActivity.class);
             startActivity(intent);
         } */
+        //傳送事件到firebase分析
 
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, faBundle);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -258,6 +265,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
         if (v == nav_header) {
+            Bundle faBundle = new Bundle();
+            faBundle.putString(FirebaseAnalytics.Param.ITEM_NAME,"nav_header");
+            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, faBundle);
             //跳轉登入畫面
             if (TSVSparser.isLogin()) {
                 toolbar.setTitle(getResources().getString(R.string.app_name));
@@ -272,6 +282,9 @@ public class MainActivity extends AppCompatActivity
 
     private void checkSession() {
                 if (TSVSparser.checkSession()) {
+                    Bundle faBundle = new Bundle();
+                    faBundle.putString(FirebaseAnalytics.Param.VALUE,String.valueOf(TSVSparser.checkSession()));
+                    mFirebaseAnalytics.logEvent("checkSession", faBundle);
                     runOnUiThread(new Runnable() {
                         public void run() {
                             Toast.makeText(MainActivity.this, "登入資訊過期,請重新登入", Toast.LENGTH_SHORT).show();

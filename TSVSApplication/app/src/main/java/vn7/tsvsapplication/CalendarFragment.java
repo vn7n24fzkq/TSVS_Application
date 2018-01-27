@@ -21,6 +21,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import org.json.simple.*;
 
 import java.util.ArrayList;
@@ -43,17 +45,20 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy年MM月", Locale.TAIWAN);
     private static SwipeRefreshLayout mSwipeRefreshLayout;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     public CalendarFragment() {
-
     }
 
     private void init() {
-
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
         mSwipeRefreshLayout.setColorSchemeResources(R.color.red, R.color.orange, R.color.green, R.color.blue);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                Bundle faBundle = new Bundle();
+                faBundle.putString("action","onRefresh");
+                mFirebaseAnalytics.logEvent("calendar", faBundle);
                 search(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH));
             }
         });
@@ -66,6 +71,10 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
                 try {
                     dateFormatter.parse(editText_calendar.getText().toString());
                     Log.d("日期(月份 +)", String.valueOf(dateFormatter.getCalendar().get(Calendar.MONTH) + 1));
+                    Bundle faBundle = new Bundle();
+                    faBundle.putString("action"," search");
+                    faBundle.putString(FirebaseAnalytics.Param.VALUE,String.valueOf(dateFormatter.getCalendar().get(Calendar.MONTH) + 1));
+                    mFirebaseAnalytics.logEvent("calendar", faBundle);
                     search(dateFormatter.getCalendar().get(Calendar.YEAR), dateFormatter.getCalendar().get(Calendar.MONTH));
                 } catch (Exception e) {
                     e.getStackTrace();
@@ -143,6 +152,9 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v == editText_calendar) {
+            Bundle faBundle = new Bundle();
+            faBundle.putString("action","click datePickerDialog");
+            mFirebaseAnalytics.logEvent("calendar", faBundle);
             datePickerDialog.show();
         }
     }
