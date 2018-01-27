@@ -1,17 +1,13 @@
 package vn7.tsvsapplication;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.res.Resources;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 
-import android.os.Looper;
 import android.os.Message;
 import android.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -20,19 +16,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import android.widget.Toast;
-
-
 import org.json.simple.*;
 
-
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -78,7 +68,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
                     Log.d("日期(月份 +)", String.valueOf(dateFormatter.getCalendar().get(Calendar.MONTH) + 1));
                     search(dateFormatter.getCalendar().get(Calendar.YEAR), dateFormatter.getCalendar().get(Calendar.MONTH));
                 } catch (Exception e) {
-
+                    e.getStackTrace();
                 }
             }
         });
@@ -119,9 +109,9 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
 
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
         try {
-            ((ViewGroup) datePickerDialog.getDatePicker()).findViewById(Resources.getSystem().getIdentifier("day", "id", "android")).setVisibility(View.GONE);
+             datePickerDialog.getDatePicker().findViewById(Resources.getSystem().getIdentifier("day", "id", "android")).setVisibility(View.GONE);
         } catch (Exception e) {
-
+            e.getStackTrace();
         }
 
     }
@@ -148,7 +138,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         }
-    };
+    }
     private final static MyHandler mHandler = new MyHandler();
     @Override
     public void onClick(View v) {
@@ -160,7 +150,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
         Context context;
         String year, month;
 
-        public CalendarLoader(Context context, String year, String month) {
+        CalendarLoader(Context context, String year, String month) {
             this.context = context;
             this.year = year;
             this.month = month;
@@ -172,7 +162,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
                 JSONObject jsonObject = TSVSparser.getGoogle_Calendar(year, month);
                 JSONArray jArray = (JSONArray) jsonObject.get("calendar");
 
-                List<CalendarItem> itemList = new ArrayList<CalendarItem>();
+                List<CalendarItem> itemList = new ArrayList<>();
                 for (int i = 0; i < jArray.size(); i++) {
                     JSONObject jObject = (JSONObject) jArray.get(i);
                     String date, schedule, department;

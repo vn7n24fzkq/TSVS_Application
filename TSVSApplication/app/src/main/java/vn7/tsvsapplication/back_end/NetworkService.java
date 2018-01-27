@@ -17,23 +17,13 @@ public class NetworkService extends Service {
     private final BroadcastReceiver connectionReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-      /*       ConnectivityManager connectMgr = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-            NetworkInfo mobNetInfo = connectMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-            NetworkInfo wifiNetInfo = connectMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-           if (!mobNetInfo.isConnected() && !wifiNetInfo.isConnected()) {
-               Log.d("NetworkService","lost connect");
-                networkConnectStatus = false;
-                // unconnect network
-            } else {
-            }
-        }*/
             ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             networkConnectStatus = cm.getActiveNetworkInfo() != null;
-            if ( networkConnectStatus) {
-             //   networkConnectStatus = true;
+            if (networkConnectStatus) {
+                //   networkConnectStatus = true;
                 Log.d("NetworkService", "connected");
             } else {
-             //   networkConnectStatus = false;
+                //   networkConnectStatus = false;
                 Log.d("NetworkService", "lost connect");
             }
 
@@ -45,6 +35,7 @@ public class NetworkService extends Service {
 
         }
     };
+
     public void init() {
         networkConnectStatus = false;
     }
@@ -63,9 +54,7 @@ public class NetworkService extends Service {
 
     @Override
     public void onDestroy() {
-        if (connectionReceiver != null) {
-            unregisterReceiver(connectionReceiver);
-        }
+        unregisterReceiver(connectionReceiver);
         super.onDestroy();
     }
 
@@ -75,16 +64,6 @@ public class NetworkService extends Service {
     }
 
     public static boolean isConnected() {
-    /*   String command = "ping -c 1 google.com";
-        boolean result = false;
-        try {
-            result = ( Runtime.getRuntime().exec(command).waitFor() == 0);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;*/
-        return  networkConnectStatus;
+        return networkConnectStatus;
     }
 }

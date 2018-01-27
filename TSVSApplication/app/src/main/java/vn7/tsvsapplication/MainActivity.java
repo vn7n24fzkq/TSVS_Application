@@ -162,7 +162,12 @@ public class MainActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-
+    @Override
+    public void onPause(){
+        super.onPause();
+        unregisterReceiver(receiver);
+    }
+    @Override
     public void onDestroy() {
         stopService(new Intent().setClass(MainActivity.this, NetworkService.class));
         super.onDestroy();
@@ -266,9 +271,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void checkSession() {
-        Thread th = new Thread() {
-            @Override
-            public void run() {
                 if (TSVSparser.checkSession()) {
                     runOnUiThread(new Runnable() {
                         public void run() {
@@ -277,9 +279,6 @@ public class MainActivity extends AppCompatActivity
                     });
                     sendMessageToHandler(session_timeout);
                 }
-            }
-        };
-        th.start();
     }
 
     private void sign_out(boolean messageVisible) {

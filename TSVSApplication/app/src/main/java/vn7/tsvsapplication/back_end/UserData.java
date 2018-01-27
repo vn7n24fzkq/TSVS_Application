@@ -1,12 +1,8 @@
 package vn7.tsvsapplication.back_end;
 
-/**
- * Created by casper on 2017/3/5.
- */
 
 public class UserData {
     public static String account_number = "";
-    //public static String password;
     public static String name = "";
     public static String classs_number = "";
     public static String classs = "";
@@ -20,7 +16,7 @@ public class UserData {
 
     public static int getGrade() {
         int gra = 1;
-        if (classs != "") {
+        if (!classs.equals("")) {
             try {
                 char grade = classs.charAt(2);
                 switch (grade) {
@@ -44,7 +40,7 @@ public class UserData {
         } else {
             gra = 1;
         }
-        return  gra;
+        return gra;
     }
 
 }

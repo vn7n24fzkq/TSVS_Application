@@ -20,10 +20,9 @@ import vn7.tsvsapplication.back_end.TSVSparser;
 public class TabFragment extends Fragment implements TabLayout.OnTabSelectedListener {
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private MyViewPagerAdapter viewPagerAdapter;
     //TabLayout tab
     private String[] titles = {};
-    private ArrayList<Fragment> fragments = new ArrayList<Fragment>();
+    private ArrayList<Fragment> fragments = new ArrayList<>();
 
     public static TabFragment newInstance(String[] titles) {
         TabFragment newFragment = new TabFragment();
@@ -45,26 +44,24 @@ public class TabFragment extends Fragment implements TabLayout.OnTabSelectedList
         for (String tab : titles) {
             tabLayout.addTab(tabLayout.newTab().setText(tab));
         }
-        //set TabLayout touch listener
-        tabLayout.setOnTabSelectedListener(this);
         setViewPager();
     }
 
     public void setViewPager() {
         if (titles != null) {
-            if(Arrays.equals(titles, getResources().getStringArray(R.array.records_array))){
+            if (Arrays.equals(titles, getResources().getStringArray(R.array.records_array))) {
                 fragments.add(new AbsenceRecordsFragment());
                 fragments.add(new RewardRecordsFragment());
-            }else if(Arrays.equals(titles, getResources().getStringArray(R.array.results_array))){
+            } else if (Arrays.equals(titles, getResources().getStringArray(R.array.results_array))) {
                 fragments.add(new PastYearsResultsFragment());
                 fragments.add(new MidtermResultsFragment());
-            }else if(Arrays.equals(titles, getResources().getStringArray(R.array.cowbei_array))){
+            } else if (Arrays.equals(titles, getResources().getStringArray(R.array.cowbei_array))) {
                 fragments.add(WebFragment.newInstance(TSVSparser.FB_kao_bei_TSVS));
                 fragments.add(WebFragment.newInstance(TSVSparser.kao_bei_TSVS));
-               // fragments.add(new CowBeiSubmitFragment());
-                viewPager.setPadding(0,0,0,0);
+                // fragments.add(new CowBeiSubmitFragment());
+                viewPager.setPadding(0, 0, 0, 0);
             }
-            viewPagerAdapter = new MyViewPagerAdapter(getActivity().getFragmentManager(), titles, fragments);
+            MyViewPagerAdapter viewPagerAdapter = new MyViewPagerAdapter(getActivity().getFragmentManager(), titles, fragments);
             viewPager.setAdapter(viewPagerAdapter);
             viewPagerAdapter.notifyDataSetChanged();
             tabLayout.setupWithViewPager(viewPager);

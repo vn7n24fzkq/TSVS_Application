@@ -29,7 +29,7 @@ public class ViewPageFragment extends Fragment{
     public TableLayout tableLayout;
     public TextView title, remindText;
     public SwipeRefreshLayout mSwipeRefreshLayout;
-    public ArrayList<TextView> textArray = new ArrayList<TextView>();
+    public ArrayList<TextView> textArray = new ArrayList<>();
 
 
     public void init() {

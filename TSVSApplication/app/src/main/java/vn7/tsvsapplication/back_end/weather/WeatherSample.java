@@ -96,15 +96,15 @@ public class WeatherSample {
                                     .get("parameter")).get(0)).get("parameterName");
                             ww.ExposureDescription = (String) ((JSONObject) ((JSONArray) ((JSONObject) UVI.get(i))
                                     .get("parameter")).get(0)).get("parameterValue");
-                            try{
-                               Integer.parseInt(ww.UVILevel);
-                            }catch (Exception e){
+                            try {
+                                Integer.parseInt(ww.UVILevel);
+                            } catch (Exception e) {
                                 String temp = ww.ExposureDescription;
-                                ww.ExposureDescription= ww.UVILevel;
-                                ww.UVILevel  = temp;
+                                ww.ExposureDescription = ww.UVILevel;
+                                ww.UVILevel = temp;
                                 temp = ww.Exposure;
-                                ww.Exposure= ww.UVI;
-                                ww.UVI  = temp;
+                                ww.Exposure = ww.UVI;
+                                ww.UVI = temp;
                             }
                             // weatherList.add(ww);
                             break;
