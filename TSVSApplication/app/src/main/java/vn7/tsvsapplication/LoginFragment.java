@@ -39,7 +39,7 @@ import vn7.tsvsapplication.back_end.weather.WeatherSample;
 
 
 public class LoginFragment extends Fragment {
-    private AdView mAdView;
+  //  private AdView mAdView;
     FirebaseRemoteConfig mFirebaseRemoteConfig;
     private EditText numberEdit, passwordEdit;
     private Button loginButton;
@@ -73,8 +73,8 @@ public class LoginFragment extends Fragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         MobileAds.initialize(getActivity(), getString(R.string.appAdMob));
 
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+      //  AdRequest adRequest = new AdRequest.Builder().build();
+    //    mAdView.loadAd(adRequest);
         SharedPreferences pref = getActivity().getSharedPreferences("account", getActivity().MODE_PRIVATE);
         numberEdit.setText(pref.getString(pre_number, ""));
         passwordEdit.setText(pref.getString(pre_password, ""));
@@ -152,7 +152,7 @@ public class LoginFragment extends Fragment {
         loginButton = (Button) v.findViewById(R.id.login);
         passwordCheckBox = (CheckBox) v.findViewById(R.id.password_checkBox);
         versionName = (TextView) v.findViewById(R.id.versionName);
-        mAdView = (AdView) v.findViewById(R.id.adView);
+    //    mAdView = (AdView) v.findViewById(R.id.adView);
         init();
         loginButton.setOnClickListener(new Button.OnClickListener() {
             @Override

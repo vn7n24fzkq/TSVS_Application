@@ -20,7 +20,7 @@ public class WeatherSample {
 
     public ArrayList<WeekWeather> getWeekWeather(String location) throws IOException {
         String city = "", town = "";
-        String locationName = "&locationName" + URLEncoder.encode(location);
+        String locationName = "&locationName=" + URLEncoder.encode(location);
         ArrayList<WeekWeather> weatherList = new ArrayList<WeekWeather>();
 
         URL url = new URL(
@@ -39,7 +39,6 @@ public class WeatherSample {
         while ((s = br.readLine()) != null) {
             content = content + s;
         }
-
         try {
             JSONObject jobject = (JSONObject) new JSONParser().parse(content);
             JSONArray jrecords = (JSONArray) ((JSONObject) jobject.get("records")).get("locations");
@@ -51,7 +50,7 @@ public class WeatherSample {
             town = (String) ((JSONObject) locations.get(0)).get("locationName");
             // get weather data
             JSONArray weatherElement = (JSONArray) ((JSONObject) locations.get(0)).get("weatherElement");
-            JSONArray UVI = null, WeatherDescription = null, Wx = null, PoP = null, MaxT = null, MinT = null;
+            JSONArray UVI = null, WeatherDescription = null, Wx = null, MaxT = null, MinT = null;
             for (int i = 0; i < weatherElement.size(); i++) {
                 JSONObject elements = (JSONObject) weatherElement.get(i);
                 if (elements.get("elementName").equals("Wx")) {
@@ -60,8 +59,6 @@ public class WeatherSample {
                     UVI = (JSONArray) elements.get("time");
                 } else if (elements.get("elementName").equals("WeatherDescription")) {
                     WeatherDescription = (JSONArray) elements.get("time");
-                } else if (elements.get("elementName").equals("PoP")) {
-                    PoP = (JSONArray) elements.get("time");
                 } else if (elements.get("elementName").equals("MaxT")) {
                     MaxT = (JSONArray) elements.get("time");
                 } else if (elements.get("elementName").equals("MinT")) {
@@ -71,6 +68,7 @@ public class WeatherSample {
             // 天氣描述
             for (int i = 0; i < WeatherDescription.size(); i++) {
                 WeekWeather ww;
+                WeekWeather wwpop;
                 try {
                     ww = weatherList.get(i);
                 } catch (IndexOutOfBoundsException e) {
@@ -79,7 +77,14 @@ public class WeatherSample {
                 }
                 ww.start_time = (String) ((JSONObject) WeatherDescription.get(i)).get("startTime");
                 ww.end_time = (String) ((JSONObject) WeatherDescription.get(i)).get("endTime");
-                ww.WeatherDescription = (String) ((JSONObject) WeatherDescription.get(i)).get("elementValue");
+                JSONArray termDescription = (JSONArray)((JSONObject) WeatherDescription.get(i)).get("elementValue");
+                ww.WeatherDescription = (String) ((JSONObject)termDescription.get(0)).get("value");
+                if(ww.WeatherDescription.contains("降雨機率")){
+                    ww.PoP =  ww.WeatherDescription.substring(ww.WeatherDescription.indexOf("降雨機率")+4,ww.WeatherDescription.indexOf("%"));
+                }else {
+                    ww.PoP="";
+                }
+
             }
             // 紫外線強度
             for (int i = 0; i < UVI.size(); i++) {
@@ -88,14 +93,14 @@ public class WeatherSample {
                         if (weatherList.get(j).start_time.equals((String) ((JSONObject) UVI.get(i)).get("startTime"))) {
 
                             WeekWeather ww = weatherList.get(j);
-                            ww.UVI = (String) ((JSONObject) ((JSONArray) ((JSONObject) UVI.get(i)).get("parameter"))
-                                    .get(1)).get("parameterName");
+                            ww.UVI = (String) ((JSONObject) ((JSONArray) ((JSONObject) UVI.get(i)).get("elementValue"))
+                                    .get(1)).get("measures");
                             ww.UVILevel = (String) ((JSONObject) ((JSONArray) ((JSONObject) UVI.get(i))
-                                    .get("parameter")).get(1)).get("parameterValue");
+                                    .get("elementValue")).get(1)).get("value");
                             ww.Exposure = (String) ((JSONObject) ((JSONArray) ((JSONObject) UVI.get(i))
-                                    .get("parameter")).get(0)).get("parameterName");
+                                    .get("elementValue")).get(0)).get("measures");
                             ww.ExposureDescription = (String) ((JSONObject) ((JSONArray) ((JSONObject) UVI.get(i))
-                                    .get("parameter")).get(0)).get("parameterValue");
+                                    .get("elementValue")).get(0)).get("value");
                             try {
                                 Integer.parseInt(ww.UVILevel);
                             } catch (Exception e) {
@@ -126,24 +131,13 @@ public class WeatherSample {
                     weatherList.add(ww);
                 }
                 if (ww.start_time == null || ww.start_time.equals((String) ((JSONObject) Wx.get(i)).get("startTime"))) {
-                    ww.Wx = (String) ((JSONObject) ((JSONArray) ((JSONObject) Wx.get(i)).get("parameter")).get(0))
-                            .get("parameterValue");
-                    ww.WxDescription = (String) ((JSONObject) Wx.get(i)).get("elementValue");
+                    ww.Wx = (String) ((JSONObject) ((JSONArray) ((JSONObject) Wx.get(i)).get("elementValue")).get(0))
+                            .get("value");
+                    ww.WxDescription =  (String) ((JSONObject) ((JSONArray) ((JSONObject) Wx.get(i)).get("elementValue")).get(1))
+                            .get("value");
                 }
             }
-            for (int i = 0; i < PoP.size(); i++) {
-                WeekWeather ww;
-                try {
-                    ww = weatherList.get(i);
-                } catch (IndexOutOfBoundsException e) {
-                    ww = new WeekWeather();
-                    weatherList.add(ww);
-                }
-                if (ww.start_time == null
-                        || ww.start_time.equals((String) ((JSONObject) PoP.get(i)).get("startTime"))) {
-                    ww.PoP = (String) ((JSONObject) PoP.get(i)).get("elementValue");
-                }
-            }
+
             for (int i = 0; i < MaxT.size(); i++) {
                 WeekWeather ww;
                 try {
@@ -154,7 +148,8 @@ public class WeatherSample {
                 }
                 if (ww.start_time == null
                         || ww.start_time.equals((String) ((JSONObject) MaxT.get(i)).get("startTime"))) {
-                    ww.MaxAT = (String) ((JSONObject) MaxT.get(i)).get("elementValue");
+                    ww.MaxAT = (String) ((JSONObject) ((JSONArray) ((JSONObject) MaxT.get(i)).get("elementValue")).get(0))
+                            .get("value");
                 }
             }
             for (int i = 0; i < MinT.size(); i++) {
@@ -167,7 +162,8 @@ public class WeatherSample {
                 }
                 if (ww.start_time == null
                         || ww.start_time.equals((String) ((JSONObject) MinT.get(i)).get("startTime"))) {
-                    ww.MinAT = (String) ((JSONObject) MinT.get(i)).get("elementValue");
+                    ww.MinAT = (String) ((JSONObject) ((JSONArray) ((JSONObject) MinT.get(i)).get("elementValue")).get(0))
+                            .get("value");
                 }
             }
         } catch (ParseException e) {
